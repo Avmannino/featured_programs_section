@@ -1,0 +1,687 @@
+@font-face {
+  font-family: "Lulo Clean One";
+  src: url("./fonts/LuloCleanOne-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lulo Clean One Bold";
+  src: url("./fonts/LuloCleanOne-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --wings-navy: #304967;
+  --wings-deep-navy: #03466f;
+  --wings-red: #e51937;
+  --white: #ffffff;
+}
+
+.featured-programs-section {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  font-family:
+    "Lulo Clean One",
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.featured-programs-header {
+  display: flex;
+  width: 100%;
+  min-height: 170px;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 14px 5% 28px;
+
+  background: var(--wings-navy);
+  color: #ffffff;
+}
+
+.featured-programs-header__brand {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns:
+    minmax(40px, 1fr)
+    auto
+    minmax(40px, 1fr);
+
+  align-items: center;
+  gap: clamp(30px, 4vw, 40px);
+}
+
+.featured-programs-header__rule {
+  display: block;
+  width: 100%;
+  height: 2px;
+
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.featured-programs-header__logo {
+  display: block;
+
+  width: clamp(220px, 30vw, 280px);
+  height: auto;
+
+  object-fit: contain;
+}
+
+.featured-programs-header__title {
+  margin: 20px 0 0;
+
+  color: #ffffff;
+
+  font-size: clamp(8px, 0.9vw, 10px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.2em;
+
+  text-align: center;
+}
+
+/* =========================================================
+   PROGRAM GRID
+   ========================================================= */
+
+.featured-programs-grid {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 2px;
+
+  background: #d6dce3;
+}
+
+/* =========================================================
+   PROGRAM CARD
+   ========================================================= */
+
+.program-card {
+  position: relative;
+
+  display: flex;
+
+  width: 100%;
+  height: clamp(300px, 32vw, 420px);
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #142d46;
+
+  isolation: isolate;
+}
+
+.program-card__video {
+  position: absolute;
+  inset: 0;
+
+  z-index: -3;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+
+  object-fit: cover;
+  object-position: center;
+
+  pointer-events: none;
+
+  filter:
+    saturate(0.88)
+    contrast(0.96);
+}
+
+.program-card--public .program-card__video,
+.program-card--open .program-card__video {
+  filter:
+    saturate(0.88)
+    contrast(0.96)
+    blur(6px);
+}
+
+/* =========================================================
+   VIDEO OVERLAYS
+   ========================================================= */
+
+.program-card__overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 20, 37, 0.18) 0%,
+      rgba(5, 21, 38, 0.14) 42%,
+      rgba(4, 19, 35, 0.31) 100%
+    );
+
+  pointer-events: none;
+}
+
+.program-card--public .program-card__overlay,
+.program-card--open .program-card__overlay,
+.program-card--adult .program-card__overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(17, 28, 40, 0.12) 0%,
+      rgba(18, 29, 41, 0.08) 42%,
+      rgba(14, 26, 39, 0.24) 100%
+    );
+}
+
+.program-card--cosmic .program-card__overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(31, 13, 38, 0.1) 0%,
+      rgba(41, 15, 44, 0.07) 44%,
+      rgba(30, 9, 35, 0.29) 100%
+    );
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.program-card__content {
+  position: relative;
+
+  display: flex;
+  width: min(88%, 390px);
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto;
+  padding: 24px 8px;
+
+  color: #ffffff;
+
+  text-align: center;
+}
+
+.program-card__eyebrow {
+  margin: 0 0 14px;
+
+  color: #ffffff;
+
+  font-size: clamp(9px, 1.05vw, 12px);
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.28);
+}
+
+.program-card__logo {
+  width: auto;
+  height: clamp(60px, 7vw, 90px);
+
+  margin: 0 0 14px;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.28));
+
+  transform: translateX(-5px);
+}
+
+.program-card__title {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Lulo Clean One Bold",
+    Arial,
+    Helvetica,
+    sans-serif;
+  font-size: clamp(21px, 2.6vw, 30px);
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.28);
+}
+
+.program-card__title span {
+  display: block;
+
+  white-space: nowrap;
+}
+
+.program-card__divider {
+  width: clamp(65px, 9vw, 90px);
+  height: 2px;
+
+  margin: 15px 0;
+
+  background: var(--wings-red);
+}
+
+.program-card__meta,
+.program-card__bottom-meta {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(8px, 1.05vw, 11px);
+  font-weight: 800;
+  line-height: 1.55;
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.22);
+}
+
+.program-card__bottom-meta {
+  margin-top: 20px;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.program-card__actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+
+  gap: 16px;
+}
+
+.program-card__actions--multiple {
+  width: 100%;
+}
+
+.program-button {
+  display: inline-flex;
+
+  min-height: 50px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 22px;
+
+  border: 0;
+  border-radius: 10px;
+
+  color: #ffffff;
+
+  font-size: clamp(9px, 1vw, 11px);
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  box-shadow:
+    0 5px 9px rgba(0, 0, 0, 0.24);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.program-button--navy {
+  background: var(--wings-deep-navy);
+}
+
+.program-button--red {
+  background: var(--wings-red);
+}
+
+.program-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 13px rgba(0, 0, 0, 0.28);
+
+  filter: brightness(1.06);
+}
+
+.program-button:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 3px 7px rgba(0, 0, 0, 0.2);
+}
+
+.program-button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   INDIVIDUAL CARD ADJUSTMENTS
+   ========================================================= */
+
+.program-card--learn .program-card__content {
+  width: min(94%, 420px);
+}
+
+.program-card--learn .program-button {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.program-card--learn .program-card__title {
+  font-size: clamp(18px, 2.3vw, 27px);
+  line-height: 1.55;
+}
+
+.program-card--adult .program-card__title {
+  font-size: clamp(19px, 2.35vw, 28px);
+}
+
+.program-card--mites .program-card__title {
+  font-size: clamp(20px, 2.35vw, 28px);
+}
+
+.program-card--mites .program-card__title {
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  gap: 0.35em;
+}
+
+.program-card--mites .program-card__title span {
+  flex-shrink: 0;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) and (min-width: 768px) {
+  .featured-programs-header {
+    min-height: 145px;
+  }
+
+  .featured-programs-header__logo {
+    width: 210px;
+  }
+
+  .program-card {
+    height: clamp(290px, 35vw, 350px);
+  }
+
+  .program-card__content {
+    width: 92%;
+  }
+
+  .program-card__title {
+    font-size: clamp(19px, 2.7vw, 25px);
+  }
+
+  .program-card__actions {
+    gap: 10px;
+  }
+
+  .program-button {
+    min-height: 46px;
+
+    padding:
+      10px
+      15px;
+
+    border-radius: 8px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   2 COLUMNS × 3 ROWS
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .featured-programs-header {
+    min-height: 95px;
+
+    padding:
+      8px
+      6%
+      18px;
+  }
+
+  .featured-programs-header__brand {
+    gap: 16px;
+  }
+
+  .featured-programs-header__rule {
+    height: 1px;
+  }
+
+  .featured-programs-header__logo {
+    width: clamp(115px, 37vw, 150px);
+  }
+
+  .featured-programs-header__title {
+    margin-top: 10px;
+
+    font-size: clamp(6px, 1.4vw, 7px);
+    letter-spacing: 0.16em;
+  }
+
+  .featured-programs-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 2px;
+  }
+
+  .program-card {
+    height: clamp(250px, 70vw, 320px);
+  }
+
+  .program-card__content {
+    width: 94%;
+
+    padding:
+      18px
+      5px;
+  }
+
+  .program-card__eyebrow {
+    margin-bottom: 11px;
+
+    font-size: clamp(6.5px, 2vw, 8.5px);
+    line-height: 1.4;
+    letter-spacing: 0.045em;
+  }
+
+  .program-card__logo {
+    height: clamp(38px, 12vw, 55px);
+
+    margin-bottom: 10px;
+  }
+
+  .program-card__title {
+    font-size: clamp(14px, 4.5vw, 18px);
+    line-height: 1.25;
+    letter-spacing: 0.045em;
+  }
+
+  .program-card__divider {
+    width: clamp(45px, 17vw, 62px);
+
+    margin:
+      12px
+      0;
+  }
+
+  .program-card__meta,
+  .program-card__bottom-meta {
+    max-width: 96%;
+
+    font-size: clamp(6.2px, 1.85vw, 7.6px);
+    line-height: 1.6;
+    letter-spacing: 0.055em;
+    white-space: normal;
+  }
+
+  .program-card__actions,
+  .program-card__actions--multiple {
+    width: min(88%, 150px);
+
+    flex-direction: column;
+
+    margin-top: 16px;
+
+    gap: 8px;
+  }
+
+  .program-button {
+    width: 100%;
+    min-height: 39px;
+
+    padding:
+      9px
+      7px;
+
+    border-radius: 6px;
+
+    font-size: clamp(7px, 2.25vw, 9px);
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    white-space: normal;
+
+    box-shadow:
+      0 4px 7px rgba(0, 0, 0, 0.24);
+  }
+
+  .program-card__bottom-meta {
+    margin-top: 14px;
+  }
+
+  .program-card--learn .program-card__content {
+    width: 96%;
+  }
+
+  .program-card--learn .program-card__title {
+    font-size: clamp(13px, 4.1vw, 17px);
+    line-height: 1.5;
+  }
+
+  .program-card--adult .program-card__title {
+    font-size: clamp(13px, 4vw, 17px);
+  }
+
+  .program-card--mites .program-card__title {
+    flex-direction: column;
+
+    gap: 0;
+
+    font-size: clamp(14px, 4.2vw, 18px);
+  }
+
+  .program-card--mites .program-card__title span {
+    white-space: normal;
+  }
+
+  /*
+    Matches the mobile screenshot where the Mites
+    registration button changes to Wings red.
+  */
+  .program-card--mites .program-button--navy {
+    background: var(--wings-red);
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .program-card {
+    height: 255px;
+  }
+
+  .program-card__content {
+    width: 96%;
+  }
+
+  .program-card__title {
+    font-size: 14px;
+  }
+
+  .program-card__eyebrow {
+    font-size: 6.5px;
+  }
+
+  .program-card__meta,
+  .program-card__bottom-meta {
+    font-size: 6px;
+  }
+
+  .program-card__actions,
+  .program-card__actions--multiple {
+    width: min(90%, 138px);
+  }
+
+  .program-button {
+    min-height: 37px;
+
+    font-size: 7px;
+  }
+
+  .program-card--learn .program-card__title,
+  .program-card--adult .program-card__title {
+    font-size: 12.5px;
+  }
+}
