@@ -54,6 +54,8 @@
 
   background: var(--wings-navy);
   color: #ffffff;
+
+  border-bottom: 3px solid #d50036;
 }
 
 .featured-programs-header__brand {
@@ -91,7 +93,7 @@
 
   color: #ffffff;
 
-  font-size: clamp(8px, 0.9vw, 10px);
+  font-size: clamp(11px, 1.2vw, 13px);
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0.2em;
@@ -111,7 +113,7 @@
 
   gap: 2px;
 
-  background: #d6dce3;
+  background: #d50036;
 }
 
 /* =========================================================
@@ -277,8 +279,8 @@
     sans-serif;
   font-size: clamp(21px, 2.6vw, 30px);
   font-weight: 900;
-  line-height: 1.25;
-  letter-spacing: 0.07em;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
 
   text-transform: uppercase;
 
@@ -288,8 +290,6 @@
 
 .program-card__title span {
   display: block;
-
-  white-space: nowrap;
 }
 
 .program-card__divider {
@@ -307,13 +307,12 @@
 
   color: #ffffff;
 
-  font-size: clamp(8px, 1.05vw, 11px);
+  font-size: clamp(8px, 0.95vw, 10px);
   font-weight: 800;
   line-height: 1.55;
   letter-spacing: 0.1em;
 
   text-transform: uppercase;
-  white-space: nowrap;
 
   text-shadow:
     0 1px 3px rgba(0, 0, 0, 0.22);
@@ -357,7 +356,7 @@
 
   color: #ffffff;
 
-  font-size: clamp(9px, 1vw, 11px);
+  font-size: clamp(9px, 0.9vw, 10px);
   font-weight: 900;
   line-height: 1.4;
   letter-spacing: 0.12em;
@@ -365,7 +364,6 @@
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  white-space: nowrap;
 
   box-shadow:
     0 5px 9px rgba(0, 0, 0, 0.24);
@@ -411,37 +409,42 @@
 
 .program-card--learn .program-card__content {
   width: min(94%, 420px);
+
+  transform: translateY(20px);
 }
 
 .program-card--learn .program-button {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 14px;
+  padding-left: 14px;
+
+  font-size: clamp(8px, 0.8vw, 9.5px);
 }
 
 .program-card--learn .program-card__title {
-  font-size: clamp(18px, 2.3vw, 27px);
-  line-height: 1.55;
+  font-size: clamp(15px, 1.9vw, 22px);
+  line-height: 1.65;
 }
 
 .program-card--adult .program-card__title {
   font-size: clamp(19px, 2.35vw, 28px);
 }
 
-.program-card--mites .program-card__title {
-  font-size: clamp(20px, 2.35vw, 28px);
+.program-card--mites .program-card__content {
+  width: min(92%, 440px);
+
+  transform: translateY(28px);
 }
 
 .program-card--mites .program-card__title {
-  flex-direction: row;
-  flex-wrap: nowrap;
-
-  gap: 0.35em;
+  font-size: clamp(17px, 2vw, 24px);
 }
 
-.program-card--mites .program-card__title span {
-  flex-shrink: 0;
+.program-card--cosmic .program-card__content {
+  transform: translateY(20px);
+}
 
-  white-space: nowrap;
+.program-card--public .program-card__content {
+  transform: translateY(-8px);
 }
 
 /* =========================================================
@@ -482,6 +485,16 @@
 
     border-radius: 8px;
   }
+
+  .program-card--learn .program-card__content,
+  .program-card--cosmic .program-card__content,
+  .program-card--public .program-card__content {
+    transform: none;
+  }
+
+  .program-card--mites .program-card__content {
+    transform: translateY(15px);
+  }
 }
 
 /* =========================================================
@@ -514,7 +527,7 @@
   .featured-programs-header__title {
     margin-top: 10px;
 
-    font-size: clamp(6px, 1.4vw, 7px);
+    font-size: clamp(8px, 1.8vw, 9.5px);
     letter-spacing: 0.16em;
   }
 
@@ -553,8 +566,8 @@
 
   .program-card__title {
     font-size: clamp(14px, 4.5vw, 18px);
-    line-height: 1.25;
-    letter-spacing: 0.045em;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
   }
 
   .program-card__divider {
@@ -611,11 +624,45 @@
 
   .program-card--learn .program-card__content {
     width: 96%;
+
+    transform: none;
+  }
+
+  .program-card--mites .program-card__content,
+  .program-card--cosmic .program-card__content,
+  .program-card--public .program-card__content {
+    transform: none;
+  }
+
+  .program-card--learn .program-card__eyebrow {
+    margin-bottom: 7px;
+
+    font-size: clamp(6px, 1.7vw, 7.5px);
+    line-height: 1.25;
   }
 
   .program-card--learn .program-card__title {
-    font-size: clamp(13px, 4.1vw, 17px);
+    font-size: clamp(11px, 3.5vw, 14px);
     line-height: 1.5;
+  }
+
+  .program-card--learn .program-card__divider {
+    margin: 12px 0;
+  }
+
+  .program-card--learn .program-card__actions {
+    margin-top: 10px;
+
+    gap: 6px;
+  }
+
+  .program-card--learn .program-button {
+    min-height: 33px;
+
+    padding: 6px 6px;
+
+    font-size: clamp(6.5px, 2vw, 8px);
+    line-height: 1.4;
   }
 
   .program-card--adult .program-card__title {
@@ -623,15 +670,7 @@
   }
 
   .program-card--mites .program-card__title {
-    flex-direction: column;
-
-    gap: 0;
-
     font-size: clamp(14px, 4.2vw, 18px);
-  }
-
-  .program-card--mites .program-card__title span {
-    white-space: normal;
   }
 
   /*
@@ -683,5 +722,15 @@
   .program-card--learn .program-card__title,
   .program-card--adult .program-card__title {
     font-size: 12.5px;
+  }
+}
+
+/* =========================================================
+   ADULT HOCKEY LEAGUE — 767px to 1200px only
+   ========================================================= */
+
+@media (min-width: 767px) and (max-width: 1200px) {
+  .program-card--adult .program-card__title {
+    line-height: 1.15;
   }
 }

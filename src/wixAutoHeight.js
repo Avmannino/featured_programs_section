@@ -19,12 +19,9 @@ function getContentHeight() {
     document.getElementById("root");
 
   if (root) {
-    return Math.ceil(
-      Math.max(
-        root.scrollHeight,
-        root.offsetHeight,
-        root.getBoundingClientRect().height
-      )
+    return Math.floor(
+      root.getBoundingClientRect()
+        .height
     );
   }
 

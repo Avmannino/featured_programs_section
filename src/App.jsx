@@ -75,7 +75,7 @@ const programs = [
     id: "mites",
     video: "videos/mites-ltp-league.mp4",
     eyebrow: "REGISTER NOW!",
-    titleLines: ["MITES' 'LTP'", "LEAGUE"],
+    titleLines: ["MITES' 'LTP' LEAGUE"],
     meta: "SUNDAYS",
     bottomMeta: "AGES 4–6",
     actions: [
