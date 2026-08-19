@@ -553,7 +553,7 @@
 .program-card--adult .program-card__content {
   width: min(94%, 500px);
 
-  transform: translateY(4px);
+  transform: translateY(-11px);
 }
 
 .program-card--adult .program-card__title {
@@ -825,9 +825,12 @@
     font-size: clamp(6px, 0.75vw, 7.5px);
   }
 
-  .program-card--adult .program-card__content,
   .program-card--open .program-card__content {
     transform: none;
+  }
+
+  .program-card--adult .program-card__content {
+    transform: translateY(-8px);
   }
 
   .program-card--mites .program-card__content {
@@ -1009,9 +1012,12 @@
     transform: none;
   }
 
-  .program-card--adult .program-card__content,
   .program-card--open .program-card__content {
     transform: none;
+  }
+
+  .program-card--adult .program-card__content {
+    transform: translateY(-8px);
   }
 
   .program-card--cosmic .program-card__content {
@@ -1047,7 +1053,7 @@
   .program-card--learn .program-card__actions {
     margin-top: 9px;
 
-    gap: 6px;
+    gap: 0;
   }
 
   .program-card--adult .program-card__title {
@@ -1180,484 +1186,220 @@
 }
 
 /* =========================================================
-   REGISTRATION CORNER RIBBONS
-   Matches the triangular corner treatment from the
-   selected concept image.
+   REGISTRATION STATUS PILL
    ========================================================= */
 
-/*
-  The ribbon is a true top-left triangle, not a rotated
-  rectangular strip.
+.program-card__registration-pill {
+  position: relative;
 
-  The copy sits on the diagonal and is rotated as one
-  centered group so both lines stay visually centered.
-*/
+  display: inline-flex;
 
-.program-card__registration-ribbon {
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: fit-content;
+  min-height: 38px;
 
-  z-index: 4;
-
-  width: clamp(128px, 9.5vw, 158px);
-  aspect-ratio: 1 / 1;
-
-  overflow: hidden;
-
-  background: var(--wings-red);
-
-  opacity: 0.8;
-
-  clip-path:
-    polygon(
-      0 0,
-      100% 0,
-      0 100%
-    );
-
-  filter:
-    drop-shadow(
-      2px 3px 5px rgba(0, 0, 0, 0.22)
-    );
-
-  pointer-events: none;
-}
-
-/*
-  White border along the exposed diagonal edge of the
-  triangle ribbon.
-
-  The line starts at the triangle's top-right point and
-  runs exactly to its bottom-left point. Because the ribbon
-  itself is clipped to a right triangle, only the diagonal
-  border remains visible.
-*/
-
-.program-card__registration-ribbon::after {
-  content: "";
-
-  position: absolute;
-  top: 0;
-  left: 100%;
-
-  z-index: 5;
-
-  width: 141.5%;
-  height: 12px;
-
-  background: #ffffff;
-
-  transform:
-    rotate(135deg);
-
-  transform-origin:
-    0 50%;
-
-  pointer-events: none;
-}
-
-.program-card__registration-ribbon-copy {
-  position: absolute;
-
-  top: 27%;
-  left: 29%;
-
-  display: flex;
-
-  width: 90%;
-
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  gap: clamp(2px, 0.18vw, 3px);
+  margin:
+    0
+    0
+    clamp(14px, 1.25vw, 18px);
+
+  padding:
+    8px
+    clamp(14px, 1.25vw, 18px);
+
+  gap: 0;
+
+  border: 2px solid #d61f3e;
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 38, 67, 0.82) 0%,
+      rgba(3, 32, 58, 0.9) 100%
+    );
 
   color: #ffffff;
 
   font-family:
-    "Arial Narrow",
+    "Lulo Clean One Bold",
     Arial,
     Helvetica,
     sans-serif;
 
+  font-size: clamp(9px, 0.84vw, 11.5px);
   font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.11em;
 
   text-align: center;
   text-transform: uppercase;
 
-  transform:
-    translate(-50%, -50%)
-    rotate(-45deg);
-
-  transform-origin: center;
-}
-
-.program-card__registration-ribbon-dot {
-  position: relative;
-
-  display: block;
-
-  width: clamp(15px, 1.05vw, 19px);
-  height: clamp(15px, 1.05vw, 19px);
-
-  margin-bottom: clamp(6px, 0.48vw, 9px);
-
-  flex: 0 0 auto;
-
-  border: 2px solid rgba(255, 255, 255, 0.95);
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle at 35% 35%,
-      #ffb3b3 0%,
-      #ff4d4d 22%,
-      #ff1717 48%,
-      #c90000 100%
-    );
-
   box-shadow:
-    0 0 0 2px rgba(255, 255, 255, 0.18),
-    0 0 7px rgba(255, 30, 30, 0.95),
-    0 0 14px rgba(255, 30, 30, 0.7);
+    0 0 7px rgba(214, 31, 62, 0.45),
+    0 0 15px rgba(214, 31, 62, 0.22),
+    inset 0 0 8px rgba(214, 31, 62, 0.1);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   animation:
-    program-card-ribbon-blink
-    1.15s
-    ease-in-out
+    registration-pill-glow
+    3.8s
+    cubic-bezier(0.45, 0, 0.55, 1)
     infinite;
 
-  transform-origin: center;
+  isolation: isolate;
 }
 
-.program-card__registration-ribbon-dot::after {
+.program-card__registration-pill::before {
   content: "";
 
   position: absolute;
-  inset: 50% auto auto 50%;
+  inset: -5px;
 
-  width: 220%;
-  height: 220%;
+  z-index: -1;
 
-  border-radius: 50%;
+  border: 1px solid rgba(214, 31, 62, 0.25);
+  border-radius: inherit;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 70, 70, 0.42) 0%,
-      rgba(255, 40, 40, 0.2) 42%,
-      rgba(255, 20, 20, 0) 72%
-    );
+  opacity: 0;
 
-  transform:
-    translate(-50%, -50%);
+  box-shadow:
+    0 0 15px rgba(214, 31, 62, 0.3);
 
-  pointer-events: none;
+  animation:
+    registration-pill-halo
+    3.8s
+    cubic-bezier(0.45, 0, 0.55, 1)
+    infinite;
 }
 
-@keyframes program-card-ribbon-blink {
+
+.program-card__registration-pill-label {
+  display: block;
+
+  transform: translateY(1px);
+}
+
+@keyframes registration-pill-glow {
   0%,
   100% {
-    opacity: 1;
-
-    transform:
-      scale(1);
+    border-color: #d61f3e;
 
     box-shadow:
-      0 0 0 2px rgba(255, 255, 255, 0.18),
-      0 0 10px rgba(255, 30, 30, 0.98),
-      0 0 20px rgba(255, 30, 30, 0.78),
-      0 0 28px rgba(255, 30, 30, 0.42);
+      0 0 5px rgba(214, 31, 62, 0.34),
+      0 0 11px rgba(214, 31, 62, 0.14),
+      inset 0 0 6px rgba(214, 31, 62, 0.07);
   }
 
   50% {
-    opacity: 0.45;
-
-    transform:
-      scale(0.82);
+    border-color: #d61f3e;
 
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.1),
-      0 0 3px rgba(255, 30, 30, 0.45),
-      0 0 7px rgba(255, 30, 30, 0.3);
+      0 0 9px rgba(214, 31, 62, 0.72),
+      0 0 20px rgba(214, 31, 62, 0.42),
+      0 0 32px rgba(214, 31, 62, 0.18),
+      inset 0 0 10px rgba(214, 31, 62, 0.14);
   }
 }
 
-.program-card__registration-ribbon-top,
-.program-card__registration-ribbon-bottom {
-  display: block;
+@keyframes registration-pill-halo {
+  0%,
+  100% {
+    opacity: 0.06;
 
-  width: 100%;
+    transform:
+      scale(0.99);
+  }
 
-  text-align: center;
+  50% {
+    opacity: 0.5;
 
-  white-space: nowrap;
-
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.16);
-}
-
-.program-card__registration-ribbon-top {
-  font-size: clamp(9px, 0.72vw, 11.4px);
-  line-height: 1;
-  letter-spacing: 0.055em;
-}
-
-.program-card__registration-ribbon-bottom {
-  font-size: clamp(11.2px, 0.9vw, 14.5px);
-  line-height: 1;
-  letter-spacing: 0.04em;
+    transform:
+      scale(1.025);
+  }
 }
 
 /*
-  Learn to Play / Learn to Skate
+  The registration pill adds another line of content to the
+  Mites card, so reduce the old downward offset slightly.
 */
 
-.program-card--learn
-.program-card__registration-ribbon {
-  width: clamp(132px, 9.6vw, 158px);
-}
-
-.program-card--learn
-.program-card__registration-ribbon-top {
-  font-size: clamp(10.5px, 0.86vw, 13.5px);
-}
-
-.program-card--learn
-.program-card__registration-ribbon-bottom {
-  font-size: clamp(14.5px, 1.16vw, 18.5px);
-}
-
-/*
-  Mites LTP League
-
-  The copy is short, so the second line can be a little
-  larger, matching the look of "NOW OPEN!" in the concept.
-*/
-
-.program-card--mites
-.program-card__registration-ribbon {
-  width: clamp(132px, 9.6vw, 158px);
-}
-
-.program-card--mites
-.program-card__registration-ribbon-top {
-  font-size: clamp(10.5px, 0.86vw, 13.5px);
-}
-
-.program-card--mites
-.program-card__registration-ribbon-bottom {
-  font-size: clamp(14.5px, 1.16vw, 18.5px);
-}
-
-/*
-  Adult Hockey League
-
-  This needs a slightly larger triangle because the
-  second line is much longer.
-*/
-
-.program-card--adult
-.program-card__registration-ribbon {
-  width: clamp(132px, 9.6vw, 158px);
-}
-
-.program-card--adult
-.program-card__registration-ribbon-top {
-  font-size: clamp(10.5px, 0.86vw, 13.5px);
-  letter-spacing: 0.045em;
-}
-
-.program-card--adult
-.program-card__registration-ribbon-bottom {
-  font-size: clamp(14.5px, 1.16vw, 18.5px);
-  letter-spacing: 0.02em;
+.program-card--mites .program-card__content {
+  transform: translateY(-6px);
 }
 
 /* =========================================================
-   REGISTRATION RIBBONS — TABLET
+   REGISTRATION PILL — TABLET
    ========================================================= */
 
 @media (max-width: 1000px) and (min-width: 768px) {
-  .program-card__registration-ribbon {
-    width: 118px;
-  }
+  .program-card__registration-pill {
+    min-height: 31px;
 
-  .program-card__registration-ribbon::after {
-    height: 2.5px;
-  }
+    margin-bottom: 11px;
 
-  .program-card__registration-ribbon-copy {
-    top: 30%;
-    left: 30%;
+    padding:
+      6px
+      10px;
 
-    width: 90%;
-
-    gap: 2px;
-
-    transform:
-      translate(-50%, -50%)
-      rotate(-45deg);
-  }
-
-  .program-card__registration-ribbon-dot {
-    width: 13px;
-    height: 13px;
-
-    margin-bottom: 5px;
+    gap: 6px;
 
     border-width: 1.5px;
+
+    font-size: clamp(6.5px, 0.78vw, 8px);
+    letter-spacing: 0.085em;
   }
 
-  .program-card__registration-ribbon-top {
-    font-size: 8.6px;
-    letter-spacing: 0.045em;
-  }
 
-  .program-card__registration-ribbon-bottom {
-    font-size: 10.8px;
-    letter-spacing: 0.03em;
-  }
-
-  .program-card--learn
-  .program-card__registration-ribbon {
-    width: 116px;
-  }
-
-  .program-card--learn
-  .program-card__registration-ribbon-top {
-    font-size: 8.6px;
-  }
-
-  .program-card--learn
-  .program-card__registration-ribbon-bottom {
-    font-size: 11.7px;
-  }
-
-  .program-card--mites
-  .program-card__registration-ribbon {
-    width: 116px;
-  }
-
-  .program-card--mites
-  .program-card__registration-ribbon-top {
-    font-size: 8.6px;
-  }
-
-  .program-card--mites
-  .program-card__registration-ribbon-bottom {
-    font-size: 11.7px;
-  }
-
-  .program-card--adult
-  .program-card__registration-ribbon {
-    width: 116px;
-  }
-
-  .program-card--adult
-  .program-card__registration-ribbon-top {
-    font-size: 8.6px;
-    letter-spacing: 0.035em;
-  }
-
-  .program-card--adult
-  .program-card__registration-ribbon-bottom {
-    font-size: 11.7px;
-    letter-spacing: 0.015em;
+  .program-card--mites .program-card__content {
+    transform: translateY(-6px);
   }
 }
 
 /* =========================================================
-   REGISTRATION RIBBONS — MOBILE
+   REGISTRATION PILL — MOBILE
    ========================================================= */
 
 @media (max-width: 767px) {
-  .program-card__registration-ribbon {
-    width: clamp(66px, 19.5vw, 84px);
+  .program-card__registration-pill {
+    min-height: 27px;
+
+    margin-bottom: 9px;
+
+    padding:
+      5px
+      8px;
+
+    gap: 0;
+
+    border-width: 1.5px;
+
+    font-size: clamp(5.4px, 1.55vw, 6.7px);
+    letter-spacing: 0.06em;
+
+    box-shadow:
+      0 0 5px rgba(214, 31, 62, 0.42),
+      0 0 10px rgba(214, 31, 62, 0.18);
   }
 
-  .program-card__registration-ribbon::after {
-    height: 2px;
+  .program-card__registration-pill::before {
+    inset: -3px;
   }
 
-  .program-card__registration-ribbon-copy {
-    top: 32%;
-    left: 32%;
 
-    width: 90%;
-
-    gap: 1px;
-
-    transform:
-      translate(-50%, -50%)
-      rotate(-45deg);
+  .program-card--mites .program-card__content {
+    transform: translateY(-2px);
   }
+}
 
-  .program-card__registration-ribbon-dot {
-    width: 10px;
-    height: 10px;
-
-    margin-bottom: 4px;
-
-    border-width: 1px;
-  }
-
-  .program-card__registration-ribbon-top {
-    font-size: clamp(6px, 1.67vw, 7.4px);
-    letter-spacing: 0.04em;
-  }
-
-  .program-card__registration-ribbon-bottom {
-    font-size: clamp(7.5px, 2.07vw, 9.1px);
-    letter-spacing: 0.025em;
-  }
-
-  .program-card--learn
-  .program-card__registration-ribbon {
-    width: clamp(64px, 19vw, 82px);
-  }
-
-  .program-card--learn
-  .program-card__registration-ribbon-top {
-    font-size: clamp(6px, 1.67vw, 7.4px);
-  }
-
-  .program-card--learn
-  .program-card__registration-ribbon-bottom {
-    font-size: clamp(8.1px, 2.24vw, 9.8px);
-  }
-
-  .program-card--mites
-  .program-card__registration-ribbon {
-    width: clamp(64px, 19vw, 82px);
-  }
-
-  .program-card--mites
-  .program-card__registration-ribbon-top {
-    font-size: clamp(6px, 1.67vw, 7.4px);
-  }
-
-  .program-card--mites
-  .program-card__registration-ribbon-bottom {
-    font-size: clamp(8.1px, 2.24vw, 9.8px);
-  }
-
-  .program-card--adult
-  .program-card__registration-ribbon {
-    width: clamp(64px, 19vw, 82px);
-  }
-
-  .program-card--adult
-  .program-card__registration-ribbon-top {
-    font-size: clamp(6px, 1.67vw, 7.4px);
-    letter-spacing: 0.03em;
-  }
-
-  .program-card--adult
-  .program-card__registration-ribbon-bottom {
-    font-size: clamp(8.1px, 2.24vw, 9.8px);
-    letter-spacing: 0.01em;
+@media (prefers-reduced-motion: reduce) {
+  .program-card__registration-pill,
+  .program-card__registration-pill::before {
+    animation: none;
   }
 }
 
