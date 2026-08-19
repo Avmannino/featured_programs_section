@@ -66,7 +66,7 @@ const programs = [
       {
         label: "LEARN MORE",
         href: "https://www.wingsarena.com/open-hockey",
-        tone: "navy",
+        tone: "red",
       },
     ],
   },
@@ -101,7 +101,7 @@ const programs = [
       {
         label: "INFO & REGISTRATION",
         href: "https://www.wingsarena.com/adulthockey",
-        tone: "navy",
+        tone: "red",
       },
     ],
   },
