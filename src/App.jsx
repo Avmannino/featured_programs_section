@@ -36,7 +36,10 @@ const programs = [
   {
     id: "learn",
     video: "videos/learn-to-play-skate.mp4",
-    eyebrow: "SUMMER & FALL REGISTRATION IS LIVE!",
+    registration: {
+      top: "REGISTER",
+      bottom: "NOW!",
+    },
     titleLines: [
       "LEARN TO PLAY",
       "&",
@@ -74,7 +77,10 @@ const programs = [
   {
     id: "mites",
     video: "videos/mites-ltp-league.mp4",
-    eyebrow: "REGISTER NOW!",
+    registration: {
+      top: "REGISTER",
+      bottom: "NOW!",
+    },
     titleLines: ["MITES' 'LTP' LEAGUE"],
     meta: "SUNDAYS",
     bottomMeta: "AGES 4–6",
@@ -90,7 +96,10 @@ const programs = [
   {
     id: "adult",
     video: "videos/adult-hockey-league.mp4",
-    eyebrow: "REGISTRATION IS LIVE!",
+    registration: {
+      top: "REGISTER",
+      bottom: "NOW!",
+    },
     titleLines: [
       "WINGS ARENA",
       "ADULT HOCKEY",
@@ -106,6 +115,25 @@ const programs = [
     ],
   },
 ];
+
+function RegistrationRibbon({ top, bottom }) {
+  return (
+    <div
+      className="program-card__registration-ribbon"
+      aria-label={`${top} ${bottom}`}
+    >
+      <div className="program-card__registration-ribbon-copy">
+        <span className="program-card__registration-ribbon-top">
+          {top}
+        </span>
+
+        <span className="program-card__registration-ribbon-bottom">
+          {bottom}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 function ProgramCard({ program }) {
   return (
@@ -128,6 +156,13 @@ function ProgramCard({ program }) {
       </video>
 
       <div className="program-card__overlay" />
+
+      {program.registration && (
+        <RegistrationRibbon
+          top={program.registration.top}
+          bottom={program.registration.bottom}
+        />
+      )}
 
       <div className="program-card__content">
         {program.eyebrow && (

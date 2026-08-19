@@ -106,6 +106,7 @@
     Arial,
     Helvetica,
     sans-serif;
+
   font-size: clamp(11px, 1.2vw, 13px);
   font-weight: 900;
   line-height: 1;
@@ -352,7 +353,7 @@
   .program-card--mites .program-card__title {
     flex-direction: row;
 
-    font-size: clamp(14.8px, 1.67vw, 24.6px);
+    font-size: clamp(17px, 1.92vw, 28.3px);
     line-height: 1.15;
     letter-spacing: 0;
 
@@ -462,6 +463,7 @@
     Arial,
     Helvetica,
     sans-serif;
+
   font-size: clamp(8.8px, 0.88vw, 11px);
   font-weight: 900;
   line-height: 1.35;
@@ -480,7 +482,8 @@
     filter 180ms ease;
 }
 
-.program-card__actions:not(.program-card__actions--multiple) .program-button {
+.program-card__actions:not(.program-card__actions--multiple)
+  .program-button {
   min-width: 23ch;
 }
 
@@ -560,15 +563,15 @@
 .program-card--mites .program-card__content {
   width: min(96%, 500px);
 
-  transform: translateY(15px);
+  transform: translateY(35px);
 }
 
 .program-card--cosmic .program-card__content {
-  transform: translateY(6px);
+  transform: translateY(14px);
 }
 
 .program-card--public .program-card__content {
-  transform: translateY(-3px);
+  transform: translateY(-14px);
 }
 
 .program-card--open .program-card__content {
@@ -581,24 +584,61 @@
 
 @media (min-width: 1400px) {
   .program-card__content {
-    padding-top: 34px;
-    padding-bottom: 34px;
+    padding-top: 38px;
+    padding-bottom: 38px;
+  }
+
+  .program-card__eyebrow {
+    font-size: clamp(9.5px, 1vw, 13px);
+  }
+
+  .program-card__logo {
+    height: clamp(66px, 6.5vw, 94px);
+  }
+
+  .program-card__divider {
+    width: clamp(70px, 7vw, 96px);
+  }
+
+  .program-card__meta,
+  .program-card__bottom-meta {
+    font-size: clamp(9px, 0.86vw, 12px);
   }
 
   .program-card--cosmic .program-card__title,
   .program-card--public .program-card__title,
   .program-card--open .program-card__title {
-    font-size: clamp(26.4px, 1.93vw, 30.8px);
+    font-size: clamp(28px, 1.93vw, 33px);
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(22.2px, 1.67vw, 25.9px);
+    font-size: clamp(24px, 1.67vw, 28px);
+  }
+
+  .program-card--adult .program-card__title {
+    font-size: clamp(20px, 2.2vw, 31px);
+  }
+
+  .program-card--learn .program-card__title {
+    font-size: clamp(18px, 1.93vw, 26px);
   }
 
   .program-card--public .program-card__meta,
   .program-card--open .program-card__meta,
   .program-card--adult .program-card__meta {
-    font-size: clamp(8.8px, 0.72vw, 9.9px);
+    font-size: clamp(9.5px, 0.72vw, 11px);
+  }
+
+  .program-button {
+    min-height: 54px;
+
+    font-size: clamp(9.5px, 0.88vw, 12px);
+  }
+
+  .program-card--cosmic .program-button,
+  .program-card--public .program-button,
+  .program-card--open .program-button {
+    font-size: clamp(10.5px, 0.99vw, 13px);
   }
 }
 
@@ -618,7 +658,7 @@
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(15.4px, 1.55vw, 18.5px);
+    font-size: clamp(17.7px, 1.78vw, 21.3px);
   }
 
   .program-card--public .program-card__meta,
@@ -646,12 +686,6 @@
   .featured-programs-header__logo {
     width: 210px;
   }
-
-  /*
-    Fixed tablet height prevents the two grid rows
-    from shrinking and leaving white space underneath
-    inside the Wix embed.
-  */
 
   .program-card {
     height: 400px;
@@ -693,7 +727,7 @@
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(10.5px, 1.35vw, 13px);
+    font-size: clamp(12.1px, 1.55vw, 15px);
     line-height: 1.15;
     letter-spacing: 0;
 
@@ -783,11 +817,20 @@
   }
 
   .program-card--adult .program-card__content,
-  .program-card--mites .program-card__content,
-  .program-card--cosmic .program-card__content,
-  .program-card--public .program-card__content,
   .program-card--open .program-card__content {
     transform: none;
+  }
+
+  .program-card--mites .program-card__content {
+    transform: translateY(10px);
+  }
+
+  .program-card--cosmic .program-card__content {
+    transform: translateY(8px);
+  }
+
+  .program-card--public .program-card__content {
+    transform: translateY(-20px);
   }
 
   .program-card--adult .program-card__title {
@@ -922,17 +965,22 @@
     gap: 7px;
   }
 
+  .program-card__actions:not(.program-card__actions--multiple)
+    .program-button {
+    min-width: 0;
+  }
+
   .program-button {
     width: 100%;
-    min-height: 39px;
+    min-height: 33px;
 
     padding:
-      9px
-      7px;
+      6px
+      6px;
 
     border-radius: 6px;
 
-    font-size: clamp(7px, 2.15vw, 8.7px);
+    font-size: clamp(6.3px, 1.9vw, 7.8px);
     line-height: 1.35;
     letter-spacing: 0.075em;
 
@@ -940,12 +988,6 @@
 
     box-shadow:
       0 4px 7px rgba(0, 0, 0, 0.24);
-  }
-
-  .program-card--cosmic .program-button,
-  .program-card--public .program-button,
-  .program-card--open .program-button {
-    font-size: clamp(7.5px, 2.3vw, 9.3px);
   }
 
   .program-card__bottom-meta {
@@ -959,14 +1001,20 @@
   }
 
   .program-card--adult .program-card__content,
-  .program-card--cosmic .program-card__content,
-  .program-card--public .program-card__content,
   .program-card--open .program-card__content {
     transform: none;
   }
 
-  .program-card--mites .program-card__content {
+  .program-card--cosmic .program-card__content {
     transform: translateY(8px);
+  }
+
+  .program-card--public .program-card__content {
+    transform: translateY(-20px);
+  }
+
+  .program-card--mites .program-card__content {
+    transform: translateY(18px);
   }
 
   .program-card--learn .program-card__eyebrow {
@@ -993,24 +1041,13 @@
     gap: 6px;
   }
 
-  .program-card--learn .program-button {
-    min-height: 33px;
-
-    padding:
-      6px
-      6px;
-
-    font-size: clamp(6.3px, 1.9vw, 7.8px);
-    line-height: 1.35;
-  }
-
   .program-card--adult .program-card__title {
     font-size: clamp(12px, 3.7vw, 16px);
     line-height: 1.28;
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(12px, 3.8vw, 17px);
+    font-size: clamp(15px, 4.6vw, 20.7px);
   }
 
   .program-card--mites .program-button--navy {
@@ -1039,9 +1076,12 @@
   .program-card__title,
   .program-card--cosmic .program-card__title,
   .program-card--public .program-card__title,
-  .program-card--open .program-card__title,
-  .program-card--mites .program-card__title {
+  .program-card--open .program-card__title {
     font-size: 13px;
+  }
+
+  .program-card--mites .program-card__title {
+    font-size: 15px;
   }
 
   .program-card__eyebrow {
@@ -1064,16 +1104,12 @@
   .program-button {
     min-height: 37px;
 
-    font-size: 6.8px;
+    font-size: 6.2px;
   }
 
   .program-card--learn .program-card__title,
   .program-card--adult .program-card__title {
     font-size: 11.5px;
-  }
-
-  .program-card--learn .program-button {
-    font-size: 6.2px;
   }
 }
 
@@ -1085,5 +1121,493 @@
 @media (min-width: 767px) and (max-width: 1200px) {
   .program-card--adult .program-card__title {
     line-height: 1.18;
+  }
+}
+
+/* =========================================================
+   DESKTOP + TABLET
+   FILL AVAILABLE VIEWPORT HEIGHT
+   ========================================================= */
+
+@media (min-width: 768px) {
+  .featured-programs-section {
+    display: flex;
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    flex-direction: column;
+  }
+
+  .featured-programs-header {
+    flex: 0 0 auto;
+  }
+
+  .featured-programs-grid {
+    flex: 1 1 auto;
+
+    grid-template-rows:
+      repeat(2, minmax(0, 1fr));
+
+    align-content: stretch;
+  }
+
+  .program-card {
+    height: 100%;
+    min-height: 350px;
+  }
+}
+
+/* =========================================================
+   TABLET MINIMUM CARD HEIGHT
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  .program-card {
+    height: 100%;
+    min-height: 400px;
+  }
+}
+
+/* =========================================================
+   REGISTRATION CORNER RIBBONS
+   Matches the triangular corner treatment from the
+   selected concept image.
+   ========================================================= */
+
+/*
+  The ribbon is a true top-left triangle, not a rotated
+  rectangular strip.
+
+  The copy sits on the diagonal and is rotated as one
+  centered group so both lines stay visually centered.
+*/
+
+.program-card__registration-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: 4;
+
+  width: clamp(128px, 9.5vw, 158px);
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background: var(--wings-red);
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      0 100%
+    );
+
+  filter:
+    drop-shadow(
+      2px 3px 5px rgba(0, 0, 0, 0.22)
+    );
+
+  pointer-events: none;
+}
+
+.program-card__registration-ribbon-copy {
+  position: absolute;
+
+  top: 37%;
+  left: 37%;
+
+  display: flex;
+
+  width: 90%;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(2px, 0.18vw, 3px);
+
+  color: #ffffff;
+
+  font-family:
+    "Arial Narrow",
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-weight: 900;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-45deg);
+
+  transform-origin: center;
+}
+
+.program-card__registration-ribbon-top,
+.program-card__registration-ribbon-bottom {
+  display: block;
+
+  width: 100%;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.16);
+}
+
+.program-card__registration-ribbon-top {
+  font-size: clamp(7.6px, 0.62vw, 9.8px);
+  line-height: 1;
+  letter-spacing: 0.055em;
+}
+
+.program-card__registration-ribbon-bottom {
+  font-size: clamp(9.6px, 0.78vw, 12.5px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+/*
+  Learn to Play / Learn to Skate
+*/
+
+.program-card--learn
+.program-card__registration-ribbon {
+  width: clamp(132px, 9.6vw, 158px);
+}
+
+.program-card--learn
+.program-card__registration-ribbon-top {
+  font-size: clamp(9px, 0.74vw, 11.5px);
+}
+
+.program-card--learn
+.program-card__registration-ribbon-bottom {
+  font-size: clamp(12.5px, 1vw, 16px);
+}
+
+/*
+  Mites LTP League
+
+  The copy is short, so the second line can be a little
+  larger, matching the look of "NOW OPEN!" in the concept.
+*/
+
+.program-card--mites
+.program-card__registration-ribbon {
+  width: clamp(132px, 9.6vw, 158px);
+}
+
+.program-card--mites
+.program-card__registration-ribbon-top {
+  font-size: clamp(9px, 0.74vw, 11.5px);
+}
+
+.program-card--mites
+.program-card__registration-ribbon-bottom {
+  font-size: clamp(12.5px, 1vw, 16px);
+}
+
+/*
+  Adult Hockey League
+
+  This needs a slightly larger triangle because the
+  second line is much longer.
+*/
+
+.program-card--adult
+.program-card__registration-ribbon {
+  width: clamp(132px, 9.6vw, 158px);
+}
+
+.program-card--adult
+.program-card__registration-ribbon-top {
+  font-size: clamp(9px, 0.74vw, 11.5px);
+  letter-spacing: 0.045em;
+}
+
+.program-card--adult
+.program-card__registration-ribbon-bottom {
+  font-size: clamp(12.5px, 1vw, 16px);
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   REGISTRATION RIBBONS — TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) and (min-width: 768px) {
+  .program-card__registration-ribbon {
+    width: 118px;
+  }
+
+  .program-card__registration-ribbon-copy {
+    top: 37%;
+    left: 37%;
+
+    width: 90%;
+
+    gap: 2px;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-45deg);
+  }
+
+  .program-card__registration-ribbon-top {
+    font-size: 6.2px;
+    letter-spacing: 0.045em;
+  }
+
+  .program-card__registration-ribbon-bottom {
+    font-size: 7.8px;
+    letter-spacing: 0.03em;
+  }
+
+  .program-card--learn
+  .program-card__registration-ribbon {
+    width: 116px;
+  }
+
+  .program-card--learn
+  .program-card__registration-ribbon-top {
+    font-size: 6.2px;
+  }
+
+  .program-card--learn
+  .program-card__registration-ribbon-bottom {
+    font-size: 8.4px;
+  }
+
+  .program-card--mites
+  .program-card__registration-ribbon {
+    width: 116px;
+  }
+
+  .program-card--mites
+  .program-card__registration-ribbon-top {
+    font-size: 6.2px;
+  }
+
+  .program-card--mites
+  .program-card__registration-ribbon-bottom {
+    font-size: 8.4px;
+  }
+
+  .program-card--adult
+  .program-card__registration-ribbon {
+    width: 116px;
+  }
+
+  .program-card--adult
+  .program-card__registration-ribbon-top {
+    font-size: 6.2px;
+    letter-spacing: 0.035em;
+  }
+
+  .program-card--adult
+  .program-card__registration-ribbon-bottom {
+    font-size: 8.4px;
+    letter-spacing: 0.015em;
+  }
+}
+
+/* =========================================================
+   REGISTRATION RIBBONS — MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .program-card__registration-ribbon {
+    width: clamp(66px, 19.5vw, 84px);
+  }
+
+  .program-card__registration-ribbon-copy {
+    top: 32%;
+    left: 32%;
+
+    width: 90%;
+
+    gap: 1px;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-45deg);
+  }
+
+  .program-card__registration-ribbon-top {
+    font-size: clamp(5.2px, 1.45vw, 6.4px);
+    letter-spacing: 0.04em;
+  }
+
+  .program-card__registration-ribbon-bottom {
+    font-size: clamp(6.5px, 1.8vw, 7.9px);
+    letter-spacing: 0.025em;
+  }
+
+  .program-card--learn
+  .program-card__registration-ribbon {
+    width: clamp(64px, 19vw, 82px);
+  }
+
+  .program-card--learn
+  .program-card__registration-ribbon-top {
+    font-size: clamp(5.2px, 1.45vw, 6.4px);
+  }
+
+  .program-card--learn
+  .program-card__registration-ribbon-bottom {
+    font-size: clamp(7px, 1.95vw, 8.5px);
+  }
+
+  .program-card--mites
+  .program-card__registration-ribbon {
+    width: clamp(64px, 19vw, 82px);
+  }
+
+  .program-card--mites
+  .program-card__registration-ribbon-top {
+    font-size: clamp(5.2px, 1.45vw, 6.4px);
+  }
+
+  .program-card--mites
+  .program-card__registration-ribbon-bottom {
+    font-size: clamp(7px, 1.95vw, 8.5px);
+  }
+
+  .program-card--adult
+  .program-card__registration-ribbon {
+    width: clamp(64px, 19vw, 82px);
+  }
+
+  .program-card--adult
+  .program-card__registration-ribbon-top {
+    font-size: clamp(5.2px, 1.45vw, 6.4px);
+    letter-spacing: 0.03em;
+  }
+
+  .program-card--adult
+  .program-card__registration-ribbon-bottom {
+    font-size: clamp(7px, 1.95vw, 8.5px);
+    letter-spacing: 0.01em;
+  }
+}
+
+
+/* =========================================================
+   ADULT LEAGUE TITLE
+
+   1726px and wider:
+   WINGS ARENA
+   ADULT HOCKEY LEAGUE
+
+   1725px and smaller:
+   WINGS ARENA
+   ADULT HOCKEY
+   LEAGUE
+   ========================================================= */
+
+.program-card--adult
+.program-card__title {
+  display: grid;
+
+  width: 100%;
+
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  justify-items: center;
+  align-items: center;
+
+  column-gap: 0;
+  row-gap: 0;
+
+  text-align: center;
+}
+
+.program-card--adult
+.program-card__title span {
+  display: block;
+
+  width: auto;
+  max-width: 100%;
+
+  margin: 0;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+/*
+  Wide desktop:
+  combine ADULT HOCKEY + LEAGUE into the same centered row.
+*/
+
+@media (min-width: 1726px) {
+  .program-card--adult
+  .program-card__content {
+    width: min(98%, 620px);
+    max-width: 98%;
+  }
+
+  .program-card--adult
+  .program-card__title {
+    grid-template-columns:
+      auto
+      auto;
+
+    justify-content: center;
+
+    column-gap: 0.55ch;
+  }
+
+  .program-card--adult
+  .program-card__title span:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .program-card--adult
+  .program-card__title span:nth-child(2) {
+    grid-column: 1;
+  }
+
+  .program-card--adult
+  .program-card__title span:nth-child(3) {
+    grid-column: 2;
+  }
+}
+
+/*
+  1725px and smaller:
+  all three pieces get their own centered row.
+
+  This prevents LEAGUE from overflowing between
+  approximately 1000px and 1725px.
+*/
+
+@media (max-width: 1725px) {
+  .program-card--adult
+  .program-card__title {
+    grid-template-columns:
+      minmax(0, 1fr);
+
+    justify-content: stretch;
+  }
+
+  .program-card--adult
+  .program-card__title span:first-child,
+  .program-card--adult
+  .program-card__title span:nth-child(2),
+  .program-card--adult
+  .program-card__title span:nth-child(3) {
+    grid-column: 1;
   }
 }
