@@ -1,6 +1,7 @@
 html {
   width: 100%;
   min-width: 0;
+
   height: auto;
   min-height: 0;
 
@@ -15,6 +16,7 @@ html {
 body {
   width: 100%;
   min-width: 0;
+
   height: auto;
   min-height: 0;
 
@@ -38,6 +40,7 @@ body {
 #root {
   width: 100%;
   min-width: 0;
+
   height: auto;
   min-height: 0;
 
