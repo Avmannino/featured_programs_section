@@ -125,6 +125,11 @@ function RegistrationRibbon({ top, bottom }) {
       aria-label={`${top} ${bottom}`}
     >
       <div className="program-card__registration-ribbon-copy">
+        <span
+          className="program-card__registration-ribbon-dot"
+          aria-hidden="true"
+        />
+
         <span className="program-card__registration-ribbon-top">
           {top}
         </span>
