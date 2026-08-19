@@ -77,6 +77,7 @@ const programs = [
   {
     id: "mites",
     video: "videos/mites-ltp-league.mp4",
+    logo: "images/wings-arena-logo-alt.png",
     registration: {
       top: "REGISTER",
       bottom: "NOW!",
@@ -96,6 +97,7 @@ const programs = [
   {
     id: "adult",
     video: "videos/adult-hockey-league.mp4",
+    logo: "images/wings-arena-logo-alt.png",
     registration: {
       top: "REGISTER",
       bottom: "NOW!",
