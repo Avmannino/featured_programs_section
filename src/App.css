@@ -184,13 +184,32 @@
     contrast(0.96);
 }
 
-.program-card--public .program-card__video,
-.program-card--open .program-card__video,
 .program-card--mites .program-card__video {
   filter:
     saturate(0.88)
     contrast(0.96)
     blur(9px);
+}
+
+.program-card--public .program-card__video {
+  filter:
+    saturate(0.88)
+    contrast(0.96)
+    blur(12px);
+}
+
+.program-card--open .program-card__video {
+  filter:
+    saturate(0.88)
+    contrast(0.96)
+    blur(12px);
+}
+
+.program-card--learn .program-card__video {
+  filter:
+    saturate(0.88)
+    contrast(0.96)
+    blur(12px);
 }
 
 /* =========================================================
@@ -406,6 +425,10 @@
 .program-card__bottom-meta {
   margin-top:
     clamp(16px, 1.6vw, 20px);
+}
+
+.program-card__meta-pipe {
+  color: var(--wings-red);
 }
 
 @media (min-width: 768px) {
@@ -1186,42 +1209,160 @@
 }
 
 /* =========================================================
-   REGISTRATION STATUS PILL
+   REGISTRATION STATUS TAG
    ========================================================= */
 
-.program-card__registration-pill {
-  position: relative;
+.program-card__registration-tag {
+  position: absolute;
+  top: clamp(16px, 1.5vw, 22px);
+  right: 0;
 
-  display: inline-flex;
+  z-index: 2;
 
-  width: fit-content;
-  min-height: 38px;
+  display: flex;
 
-  align-items: center;
+  min-width: clamp(122px, 11.5vw, 158px);
+
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
 
-  margin:
-    0
-    0
-    clamp(14px, 1.25vw, 18px);
-
   padding:
-    8px
-    clamp(14px, 1.25vw, 18px);
+    11px
+    clamp(14px, 1.15vw, 18px)
+    10px
+    clamp(16px, 1.3vw, 20px);
 
-  gap: 0;
-
-  border: 2px solid #d61f3e;
-  border-radius: 999px;
+  border: 2px solid rgba(214, 31, 62, 0.28);
 
   background:
     linear-gradient(
       180deg,
-      rgba(4, 38, 67, 0.82) 0%,
-      rgba(3, 32, 58, 0.9) 100%
+      rgba(3, 42, 72, 0.94) 0%,
+      rgba(3, 31, 56, 0.97) 100%
     );
 
   color: #ffffff;
+
+  box-shadow:
+    -4px 6px 14px rgba(0, 0, 0, 0.24),
+    -2px 2px 10px rgba(214, 31, 62, 0.12);
+
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   REGISTRATION LASER
+   ONE CONTINUOUS FADED BEAM
+   COUNTER-CLOCKWISE
+   ========================================================= */
+
+.program-card__registration-laser {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+/*
+  We animate the group instead of individually animating
+  every fade layer.
+
+  The dash offset is inherited by every child stroke,
+  keeping every layer perfectly synchronized.
+*/
+.program-card__registration-laser-runner {
+  stroke-dashoffset: 0;
+
+  animation:
+    registration-laser-counter-clockwise
+    4.4s
+    linear
+    infinite;
+}
+
+/*
+  Every fade layer occupies the exact same physical line.
+
+  The only difference is its length.
+
+  Long faint layers form the tail.
+  More and more layers overlap toward the front.
+  This naturally increases opacity toward the head.
+*/
+.program-card__registration-laser-line {
+  fill: none;
+
+  stroke: #ff2448;
+  stroke-width: 2.8px;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+}
+
+/*
+  The head sits at the exact same starting point as every
+  fade layer.
+
+  This creates a crisp fully opaque front without creating
+  a second separated laser.
+*/
+.program-card__registration-laser-head {
+  fill: none;
+
+  stroke: #ff2448;
+  stroke-width: 3.1px;
+
+  stroke-dasharray: 1.8 98.2;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  opacity: 1;
+}
+
+/*
+  Positive dash offset moves the laser counter-clockwise.
+
+  pathLength="100" means 100 units is exactly one complete
+  lap around the registration box.
+*/
+@keyframes registration-laser-counter-clockwise {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+
+/* =========================================================
+   REGISTRATION TEXT
+   ========================================================= */
+
+.program-card__registration-tag-line {
+  position: relative;
+
+  z-index: 2;
+
+  display: block;
 
   font-family:
     "Lulo Clean One Bold",
@@ -1229,180 +1370,123 @@
     Helvetica,
     sans-serif;
 
-  font-size: clamp(9px, 0.84vw, 11.5px);
+  font-size: clamp(7.5px, 0.66vw, 10px);
   font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.11em;
+  line-height: 1.35;
+  letter-spacing: 0.1em;
 
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
 
-  box-shadow:
-    0 0 7px rgba(214, 31, 62, 0.45),
-    0 0 15px rgba(214, 31, 62, 0.22),
-    inset 0 0 8px rgba(214, 31, 62, 0.1);
-
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-
-  animation:
-    registration-pill-glow
-    3.8s
-    cubic-bezier(0.45, 0, 0.55, 1)
-    infinite;
-
-  isolation: isolate;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.28);
 }
 
-.program-card__registration-pill::before {
-  content: "";
-
-  position: absolute;
-  inset: -5px;
-
-  z-index: -1;
-
-  border: 1px solid rgba(214, 31, 62, 0.25);
-  border-radius: inherit;
-
-  opacity: 0;
-
-  box-shadow:
-    0 0 15px rgba(214, 31, 62, 0.3);
-
-  animation:
-    registration-pill-halo
-    3.8s
-    cubic-bezier(0.45, 0, 0.55, 1)
-    infinite;
+.program-card__registration-tag-line--top {
+  opacity: 0.88;
 }
 
+.program-card__registration-tag-line--bottom {
+  margin-top: 2px;
 
-.program-card__registration-pill-label {
-  display: block;
-
-  transform: translateY(1px);
-}
-
-@keyframes registration-pill-glow {
-  0%,
-  100% {
-    border-color: #d61f3e;
-
-    box-shadow:
-      0 0 5px rgba(214, 31, 62, 0.34),
-      0 0 11px rgba(214, 31, 62, 0.14),
-      inset 0 0 6px rgba(214, 31, 62, 0.07);
-  }
-
-  50% {
-    border-color: #d61f3e;
-
-    box-shadow:
-      0 0 9px rgba(214, 31, 62, 0.72),
-      0 0 20px rgba(214, 31, 62, 0.42),
-      0 0 32px rgba(214, 31, 62, 0.18),
-      inset 0 0 10px rgba(214, 31, 62, 0.14);
-  }
-}
-
-@keyframes registration-pill-halo {
-  0%,
-  100% {
-    opacity: 0.06;
-
-    transform:
-      scale(0.99);
-  }
-
-  50% {
-    opacity: 0.5;
-
-    transform:
-      scale(1.025);
-  }
-}
-
-/*
-  The registration pill adds another line of content to the
-  Mites card, so reduce the old downward offset slightly.
-*/
-
-.program-card--mites .program-card__content {
-  transform: translateY(-6px);
+  font-size: clamp(8px, 0.72vw, 10.8px);
+  letter-spacing: 0.12em;
 }
 
 /* =========================================================
-   REGISTRATION PILL — TABLET
+   REGISTRATION TAG — TABLET
    ========================================================= */
 
 @media (max-width: 1000px) and (min-width: 768px) {
-  .program-card__registration-pill {
-    min-height: 31px;
+  .program-card__registration-tag {
+    top: 13px;
 
-    margin-bottom: 11px;
+    min-width: 106px;
 
     padding:
-      6px
-      10px;
-
-    gap: 6px;
+      9px
+      12px
+      8px
+      13px;
 
     border-width: 1.5px;
+  }
 
-    font-size: clamp(6.5px, 0.78vw, 8px);
+  .program-card__registration-laser-line {
+    stroke-width: 2.4px;
+  }
+
+  .program-card__registration-laser-head {
+    stroke-width: 2.8px;
+  }
+
+  .program-card__registration-tag-line {
+    font-size: clamp(5.8px, 0.7vw, 7px);
     letter-spacing: 0.085em;
   }
 
+  .program-card__registration-tag-line--bottom {
+    margin-top: 1px;
 
-  .program-card--mites .program-card__content {
-    transform: translateY(-6px);
+    font-size: clamp(6.2px, 0.76vw, 7.6px);
   }
 }
 
 /* =========================================================
-   REGISTRATION PILL — MOBILE
+   REGISTRATION TAG — MOBILE
    ========================================================= */
 
 @media (max-width: 767px) {
-  .program-card__registration-pill {
-    min-height: 27px;
+  .program-card__registration-tag {
+    top: 10px;
 
-    margin-bottom: 9px;
+    min-width: 88px;
 
     padding:
-      5px
-      8px;
+      7px
+      8px
+      6px
+      9px;
 
-    gap: 0;
-
-    border-width: 1.5px;
-
-    font-size: clamp(5.4px, 1.55vw, 6.7px);
-    letter-spacing: 0.06em;
+    border-width: 1px;
 
     box-shadow:
-      0 0 5px rgba(214, 31, 62, 0.42),
-      0 0 10px rgba(214, 31, 62, 0.18);
+      -3px 4px 9px rgba(0, 0, 0, 0.2),
+      -1px 1px 6px rgba(214, 31, 62, 0.1);
   }
 
-  .program-card__registration-pill::before {
-    inset: -3px;
+  .program-card__registration-laser-line {
+    stroke-width: 1.9px;
   }
 
+  .program-card__registration-laser-head {
+    stroke-width: 2.3px;
+  }
 
-  .program-card--mites .program-card__content {
-    transform: translateY(-2px);
+  .program-card__registration-tag-line {
+    font-size: clamp(4.7px, 1.35vw, 5.8px);
+    line-height: 1.4;
+    letter-spacing: 0.07em;
+  }
+
+  .program-card__registration-tag-line--bottom {
+    margin-top: 1px;
+
+    font-size: clamp(5px, 1.45vw, 6.2px);
+    letter-spacing: 0.085em;
   }
 }
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .program-card__registration-pill,
-  .program-card__registration-pill::before {
+  .program-card__registration-laser-runner {
     animation: none;
+    opacity: 0;
   }
 }
-
 
 /* =========================================================
    ADULT LEAGUE TITLE

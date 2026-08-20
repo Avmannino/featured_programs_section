@@ -1,3 +1,4 @@
+import { useEffect, useId, useRef } from "react";
 import "./App.css";
 
 const BASE_URL = import.meta.env.BASE_URL;
@@ -6,6 +7,7 @@ const programs = [
   {
     id: "cosmic",
     video: "videos/cosmic-skate.mp4",
+    playbackRate: 0.85,
     eyebrow: "WINGS ARENA PRESENTS",
     titleLines: ["COSMIC SKATE"],
     meta: "FRIDAYS | SATURDAYS",
@@ -21,7 +23,7 @@ const programs = [
   {
     id: "public",
     video: "videos/public-skate.mp4",
-    logo: "images/open-hockey-logo.png",
+    logo: "images/wings-arena-blue-alt.png",
     titleLines: ["PUBLIC SKATE"],
     meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
     actions: [
@@ -36,12 +38,10 @@ const programs = [
   {
     id: "learn",
     video: "videos/learn-to-play-skate.mp4",
+    logo: "images/wings-logo.png",
     registration: "REGISTRATION IS OPEN",
-    titleLines: [
-      "LEARN TO PLAY",
-      "&",
-      "LEARN TO SKATE",
-    ],
+    titleLines: ["LEARN TO PLAY", "&", "LEARN TO SKATE"],
+    meta: "FALL SEASON",
     actions: [
       {
         label: "LEARN TO PLAY",
@@ -59,7 +59,7 @@ const programs = [
   {
     id: "open",
     video: "videos/open-hockey.mp4",
-    logo: "images/open-hockey-logo.png",
+    logo: "images/wings-arena-white-alt.png",
     titleLines: ["OPEN HOCKEY"],
     meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
     actions: [
@@ -74,10 +74,10 @@ const programs = [
   {
     id: "mites",
     video: "videos/mites-ltp-league.mp4",
-    logo: "images/wings-arena-logo-alt.png",
+    logo: "images/wings-dark-blue.png",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["MITES' 'LTP' LEAGUE"],
-    meta: "SUNDAYS",
+    meta: "SUNDAYS THIS FALL & WINTER",
     bottomMeta: "AGES 4–6",
     actions: [
       {
@@ -91,14 +91,11 @@ const programs = [
   {
     id: "adult",
     video: "videos/adult-hockey-league.mp4",
+    playbackRate: 0.7,
     logo: "images/wings-arena-logo-alt.png",
     registration: "REGISTRATION IS OPEN",
-    titleLines: [
-      "WINGS ARENA",
-      "ADULT HOCKEY",
-      "LEAGUE",
-    ],
-    meta: "FALL / WINTER SEASON | SEPT - DEC",
+    titleLines: ["WINGS ARENA", "ADULT HOCKEY", "LEAGUE"],
+    meta: "FALL | WINTER SEASON | SEPT - DEC",
     actions: [
       {
         label: "INFO & REGISTRATION",
@@ -109,25 +106,145 @@ const programs = [
   },
 ];
 
-function RegistrationPill({ label }) {
+function renderMetaWithPipes(text) {
+  return text
+    .split("|")
+    .flatMap((part, index, parts) =>
+      index < parts.length - 1
+        ? [
+            part,
+            <span key={index} className="program-card__meta-pipe">
+              |
+            </span>,
+          ]
+        : [part]
+    );
+}
+
+/*
+  The laser is built from tightly overlapping strokes.
+
+  Every stroke has the exact same head position.
+  Each following stroke is slightly shorter.
+
+  Because they overlap instead of being offset from one
+  another, they visually merge into ONE continuous beam.
+
+  More layers = smoother opacity transition.
+*/
+const LASER_FADE_LAYERS = Array.from({ length: 28 }, (_, index) => {
+  const longestLength = 28;
+  const shortestLength = 1.5;
+
+  const progress = index / 27;
+
+  return {
+    length:
+      longestLength -
+      (longestLength - shortestLength) * progress,
+    opacity: 0.055,
+  };
+});
+
+function RegistrationTag({ label }) {
+  const rawGlowId = useId();
+  const glowId = `registration-laser-glow-${rawGlowId.replace(
+    /[^a-zA-Z0-9_-]/g,
+    ""
+  )}`;
+
   return (
-    <div
-      className="program-card__registration-pill"
-      aria-label={label}
-    >
-      <span className="program-card__registration-pill-label">
-        {label}
+    <div className="program-card__registration-tag" aria-label={label}>
+      <svg
+        className="program-card__registration-laser"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter
+            id={glowId}
+            x="-50%"
+            y="-50%"
+            width="200%"
+            height="200%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="1"
+              result="laserBlurSmall"
+            />
+
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="2.4"
+              result="laserBlurLarge"
+            />
+
+            <feMerge>
+              <feMergeNode in="laserBlurLarge" />
+              <feMergeNode in="laserBlurSmall" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <g
+          className="program-card__registration-laser-runner"
+          filter={`url(#${glowId})`}
+        >
+          {LASER_FADE_LAYERS.map((layer, index) => (
+            <rect
+              key={index}
+              className="program-card__registration-laser-line"
+              x="2.25"
+              y="2.25"
+              width="95.5"
+              height="95.5"
+              pathLength="100"
+              style={{
+                strokeDasharray: `${layer.length} ${100 - layer.length}`,
+                opacity: layer.opacity,
+              }}
+            />
+          ))}
+
+          <rect
+            className="program-card__registration-laser-head"
+            x="2.25"
+            y="2.25"
+            width="95.5"
+            height="95.5"
+            pathLength="100"
+          />
+        </g>
+      </svg>
+
+      <span className="program-card__registration-tag-line program-card__registration-tag-line--top">
+        REGISTRATION
+      </span>
+
+      <span className="program-card__registration-tag-line program-card__registration-tag-line--bottom">
+        OPEN
       </span>
     </div>
   );
 }
 
 function ProgramCard({ program }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = program.playbackRate ?? 1;
+    }
+  }, [program.playbackRate]);
+
   return (
-    <article
-      className={`program-card program-card--${program.id}`}
-    >
+    <article className={`program-card program-card--${program.id}`}>
       <video
+        ref={videoRef}
         className="program-card__video"
         autoPlay
         muted
@@ -136,19 +253,18 @@ function ProgramCard({ program }) {
         preload="metadata"
         aria-hidden="true"
       >
-        <source
-          src={`${BASE_URL}${program.video}`}
-          type="video/mp4"
-        />
+        <source src={`${BASE_URL}${program.video}`} type="video/mp4" />
       </video>
 
       <div className="program-card__overlay" />
 
+      {program.registration && (
+        <RegistrationTag label={program.registration} />
+      )}
+
       <div className="program-card__content">
         {program.eyebrow && (
-          <p className="program-card__eyebrow">
-            {program.eyebrow}
-          </p>
+          <p className="program-card__eyebrow">{program.eyebrow}</p>
         )}
 
         {program.logo && (
@@ -160,28 +276,17 @@ function ProgramCard({ program }) {
           />
         )}
 
-        {program.registration && (
-          <RegistrationPill
-            label={program.registration}
-          />
-        )}
-
         <h2 className="program-card__title">
           {program.titleLines.map((line) => (
-            <span key={line}>
-              {line}
-            </span>
+            <span key={line}>{line}</span>
           ))}
         </h2>
 
-        <div
-          className="program-card__divider"
-          aria-hidden="true"
-        />
+        <div className="program-card__divider" aria-hidden="true" />
 
         {program.meta && (
           <p className="program-card__meta">
-            {program.meta}
+            {renderMetaWithPipes(program.meta)}
           </p>
         )}
 
@@ -206,9 +311,7 @@ function ProgramCard({ program }) {
         </div>
 
         {program.bottomMeta && (
-          <p className="program-card__bottom-meta">
-            {program.bottomMeta}
-          </p>
+          <p className="program-card__bottom-meta">{program.bottomMeta}</p>
         )}
       </div>
     </article>
@@ -247,10 +350,7 @@ function App() {
         aria-label="Wings Arena Featured Programs"
       >
         {programs.map((program) => (
-          <ProgramCard
-            key={program.id}
-            program={program}
-          />
+          <ProgramCard key={program.id} program={program} />
         ))}
       </section>
     </main>
