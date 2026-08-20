@@ -60,12 +60,14 @@ const programs = [
     id: "open",
     video: "videos/open-hockey.mp4",
     logo: "images/wings-arena-white-alt.png",
-    titleLines: ["OPEN HOCKEY"],
-    meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
+    titleLines: ["LUNCHTIME", "ADULT HOCKEY"],
+    meta: "MONDAYS | THURSDAYS 11:45AM - 1:15PM",
+    metaHighlight: "11:45AM - 1:15PM",
+    bottomMeta: "BEGINNING SEPT 11TH",
     actions: [
       {
-        label: "LEARN MORE",
-        href: "https://www.wingsarena.com/open-hockey",
+        label: "INFO & REGISTRATION",
+        href: "https://www.wingsarena.com/adult-lunchtime-hockey",
         tone: "red",
       },
     ],
@@ -96,6 +98,7 @@ const programs = [
     registration: "REGISTRATION IS OPEN",
     titleLines: ["WINGS ARENA", "ADULT HOCKEY", "LEAGUE"],
     meta: "FALL | WINTER SEASON | SEPT - DEC",
+    metaBreakBeforeLastPipe: true,
     actions: [
       {
         label: "INFO & REGISTRATION",
@@ -106,19 +109,58 @@ const programs = [
   },
 ];
 
-function renderMetaWithPipes(text) {
+function renderTextWithHighlight(text, highlight, keyPrefix) {
+  if (!highlight) {
+    return [text];
+  }
+
+  const highlightIndex = text.indexOf(highlight);
+
+  if (highlightIndex === -1) {
+    return [text];
+  }
+
+  return [
+    text.slice(0, highlightIndex),
+    <span
+      key={`${keyPrefix}-highlight`}
+      className="program-card__meta-highlight"
+    >
+      {highlight}
+    </span>,
+    text.slice(highlightIndex + highlight.length),
+  ];
+}
+
+function renderMetaWithPipes(text, breakBeforeLastPipe = false, highlight) {
   return text
     .split("|")
-    .flatMap((part, index, parts) =>
-      index < parts.length - 1
-        ? [
-            part,
-            <span key={index} className="program-card__meta-pipe">
-              |
-            </span>,
-          ]
-        : [part]
-    );
+    .flatMap((part, index, parts) => {
+      const renderedPart = renderTextWithHighlight(part, highlight, index);
+
+      if (index >= parts.length - 1) {
+        return renderedPart;
+      }
+
+      const isLastPipe = index === parts.length - 2;
+
+      return [
+        ...renderedPart,
+        <span
+          key={index}
+          className={`program-card__meta-pipe${
+            breakBeforeLastPipe && isLastPipe
+              ? " program-card__meta-pipe--last"
+              : ""
+          }`}
+        >
+          |
+        </span>,
+        breakBeforeLastPipe && isLastPipe && (
+          <br key={`${index}-break`} className="program-card__meta-linebreak" />
+        ),
+      ];
+    });
 }
 
 /*
@@ -286,7 +328,11 @@ function ProgramCard({ program }) {
 
         {program.meta && (
           <p className="program-card__meta">
-            {renderMetaWithPipes(program.meta)}
+            {renderMetaWithPipes(
+              program.meta,
+              program.metaBreakBeforeLastPipe,
+              program.metaHighlight
+            )}
           </p>
         )}
 
