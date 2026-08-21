@@ -23,7 +23,7 @@ const programs = [
   {
     id: "public",
     video: "videos/public-skate.mp4",
-    logo: "images/wings-arena-blue-alt.png",
+    logo: "images/wings-arena-white-alt.png",
     titleLines: ["PUBLIC SKATE"],
     meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
     actions: [
