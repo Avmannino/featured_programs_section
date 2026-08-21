@@ -1096,11 +1096,6 @@
     text-wrap: balance;
   }
 
-  .program-card--cosmic .program-card__title,
-  .program-card--public .program-card__title {
-    white-space: nowrap;
-  }
-
   .program-card__divider {
     width: clamp(45px, 17vw, 62px);
 
