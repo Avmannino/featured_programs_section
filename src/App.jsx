@@ -60,6 +60,7 @@ const programs = [
     id: "open",
     video: "videos/open-hockey.mp4",
     logo: "images/wings-arena-white-alt.png",
+    registration: "REGISTRATION IS OPEN",
     titleLines: ["LUNCHTIME", "ADULT HOCKEY"],
     meta: "MONDAYS | THURSDAYS 11:45AM - 1:15PM",
     metaHighlight: "11:45AM - 1:15PM",
@@ -78,7 +79,7 @@ const programs = [
     video: "videos/mites-ltp-league.mp4",
     logo: "images/wings-dark-blue.png",
     registration: "REGISTRATION IS OPEN",
-    titleLines: ["MITES' 'LTP' LEAGUE"],
+    titleLines: ["MITES 'LTP' LEAGUE"],
     meta: "SUNDAYS THIS FALL & WINTER",
     bottomMeta: "AGES 4–6",
     actions: [
