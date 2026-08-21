@@ -195,21 +195,21 @@
   filter:
     saturate(0.88)
     contrast(0.96)
-    blur(12px);
+    blur(9px);
 }
 
 .program-card--open .program-card__video {
   filter:
     saturate(0.88)
     contrast(0.96)
-    blur(12px);
+    blur(9px);
 }
 
 .program-card--learn .program-card__video {
   filter:
     saturate(0.88)
     contrast(0.96)
-    blur(12px);
+    blur(9px);
 }
 
 /* =========================================================
@@ -711,6 +711,8 @@
 
   .program-card--learn .program-card__content {
     width: min(95%, 510px);
+
+    transform: translateY(-15px);
   }
 
   .program-card--adult .program-card__content {
@@ -719,6 +721,12 @@
 
   .program-card--mites .program-card__content {
     width: min(96%, 555px);
+
+    transform: translateY(4px);
+  }
+
+  .program-card--cosmic .program-card__content {
+    transform: translateY(19px);
   }
 
   .program-card__eyebrow {
@@ -785,6 +793,90 @@
     padding-left: 26px;
 
     font-size: clamp(9.5px, 0.87vw, 11.8px);
+  }
+}
+
+/* =========================================================
+   1080P (1920px AND WIDER)
+   ========================================================= */
+
+@media (min-width: 1920px) {
+  .program-card--cosmic .program-card__content {
+    transform: translateY(24px);
+  }
+
+  .program-card--adult .program-card__content {
+    transform: translateY(-13px);
+  }
+
+  .program-card--mites .program-card__content {
+    transform: translateY(-1px);
+  }
+
+  .program-card__eyebrow {
+    font-size: clamp(6.4px, 0.67vw, 8.6px);
+  }
+
+  .program-card__logo {
+    width: clamp(55.4px, 5.46vw, 78.8px);
+    height: clamp(55.4px, 5.46vw, 78.8px);
+  }
+
+  .program-card--adult .program-card__logo {
+    width: clamp(63.8px, 6.27vw, 90.6px);
+    height: clamp(63.8px, 6.27vw, 90.6px);
+  }
+
+  .program-card__divider {
+    width: clamp(58.6px, 5.86vw, 80.4px);
+  }
+
+  .program-card__meta,
+  .program-card__bottom-meta {
+    font-size: clamp(9.7px, 0.92vw, 12.8px);
+  }
+
+  .program-card--cosmic .program-card__title,
+  .program-card--public .program-card__title,
+  .program-card--open .program-card__title {
+    font-size: clamp(23.5px, 1.62vw, 27.7px);
+  }
+
+  .program-card--mites .program-card__title {
+    font-size: clamp(20.2px, 1.4vw, 23.5px);
+  }
+
+  .program-card--adult .program-card__title {
+    font-size: clamp(16.7px, 1.85vw, 26.1px);
+  }
+
+  .program-card--learn .program-card__title {
+    font-size: clamp(15.1px, 1.62vw, 21.8px);
+  }
+
+  .program-card--public .program-card__meta,
+  .program-card--open .program-card__meta,
+  .program-card--adult .program-card__meta {
+    font-size: clamp(10.1px, 0.77vw, 11.7px);
+  }
+
+  .program-button {
+    min-height: 46px;
+
+    font-size: clamp(8px, 0.74vw, 10px);
+  }
+
+  .program-card--cosmic .program-button,
+  .program-card--public .program-button,
+  .program-card--open .program-button {
+    font-size: clamp(8.8px, 0.83vw, 10.8px);
+  }
+
+  .program-card--learn .program-button {
+    padding-right: 23px;
+    padding-left: 23px;
+
+    font-size: clamp(8.4px, 0.77vw, 10.4px);
   }
 }
 
