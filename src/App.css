@@ -1875,3 +1875,38 @@
     grid-column: 1;
   }
 }
+/* =========================================================
+   1440PX+ — TALLER FEATURED PROGRAMS GRID
+   CONTENT-DRIVEN HEIGHT — NO VH/DVH FEEDBACK LOOP
+
+   At this breakpoint we deliberately stop using the iframe
+   viewport height to size the section. The grid becomes
+   content-driven and each card gets a width-based height.
+
+   Because vw changes only when the iframe WIDTH changes,
+   changing the iframe HEIGHT cannot make these cards grow
+   again. This prevents the Wix/Vite auto-height feedback loop.
+   ========================================================= */
+
+@media (min-width: 1440px) {
+  .featured-programs-section {
+    display: block;
+    height: auto;
+    min-height: 0;
+  }
+
+  .featured-programs-grid {
+    flex: none;
+    grid-template-rows: none;
+    align-content: start;
+  }
+
+  .program-card {
+    height: clamp(
+      575px,
+      calc(35.2vw + 70px),
+      595px
+    );
+    min-height: 0;
+  }
+}
