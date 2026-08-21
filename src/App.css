@@ -1875,15 +1875,3 @@
     grid-column: 1;
   }
 }
-/* =========================================================
-   1440PX+ — SLIGHTLY TALLER PROGRAM GRID
-   Adds 50px to the full section, which is split evenly
-   across the two grid rows (~25px taller per card).
-   ========================================================= */
-
-@media (min-width: 1440px) {
-  .featured-programs-section {
-    min-height: calc(100vh + 50px);
-    min-height: calc(100dvh + 50px);
-  }
-}
