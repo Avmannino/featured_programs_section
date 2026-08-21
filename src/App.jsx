@@ -98,7 +98,7 @@ const programs = [
     logo: "images/wings-arena-logo-alt.png",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["WINGS ARENA", "ADULT HOCKEY", "LEAGUE"],
-    meta: "FALL | WINTER SEASON | SEPT - DEC",
+    meta: "FALL & WINTER SEASON | SEPT - DEC",
     metaBreakBeforeLastPipe: true,
     actions: [
       {
