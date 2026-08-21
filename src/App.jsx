@@ -61,7 +61,7 @@ const programs = [
     video: "videos/open-hockey.mp4",
     logo: "images/wings-arena-white-alt.png",
     registration: "REGISTRATION IS OPEN",
-    titleLines: ["LUNCHTIME", "ADULT HOCKEY"],
+    titleLines: ["LUNCHTIME", "ADULT", "HOCKEY"],
     meta: "MONDAYS | THURSDAYS 11:45AM - 1:15PM",
     metaHighlight: "11:45AM - 1:15PM",
     bottomMeta: "BEGINNING SEPT 11TH",

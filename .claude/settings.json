@@ -5,7 +5,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5183/featured_programs_section/)",
       "Bash(node -e ' *)",
       "Bash(awk 'NR>=1009 && NR<=1603 && /program-card--cosmic .program-card__content/{print NR\": \"$0}' /home/avmannino/development/code/projects/wings_arena/featured_programs_section/src/App.css)",
-      "Bash(grep -n \"program-card--public .program-card__meta,\\\\s*$\" -A6 /home/avmannino/development/code/projects/wings_arena/featured_programs_section/src/App.css)"
+      "Bash(grep -n \"program-card--public .program-card__meta,\\\\s*$\" -A6 /home/avmannino/development/code/projects/wings_arena/featured_programs_section/src/App.css)",
+      "Bash(grep -n \"program-card--adult\\\\s*$\" -A3 /home/avmannino/development/code/projects/wings_arena/featured_programs_section/src/App.css)"
     ]
   }
 }
