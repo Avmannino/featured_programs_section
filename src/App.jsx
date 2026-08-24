@@ -93,17 +93,17 @@ const programs = [
 
   {
     id: "adult",
-    video: "videos/adult-hockey-league.mp4",
-    playbackRate: 0.7,
+    video: "videos/adult-hockey-classes.mp4",
+    playbackRate: 0.5,
     logo: "images/wings-arena-logo-alt.png",
     registration: "REGISTRATION IS OPEN",
-    titleLines: ["WINGS ARENA", "ADULT HOCKEY", "LEAGUE"],
-    meta: "FALL & WINTER SEASON | SEPT - DEC",
+    titleLines: ["ADULT HOCKEY", "CLASSES"],
+    meta: "TUESDAY MORNINGS | SEPT - NOV",
     metaBreakBeforeLastPipe: true,
     actions: [
       {
         label: "INFO & REGISTRATION",
-        href: "https://www.wingsarena.com/adulthockey",
+        href: "https://www.wingsarena.com/adult-hockey-classes",
         tone: "red",
       },
     ],

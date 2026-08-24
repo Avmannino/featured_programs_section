@@ -205,7 +205,8 @@
     blur(9px);
 }
 
-.program-card--learn .program-card__video {
+.program-card--learn .program-card__video,
+.program-card--adult .program-card__video {
   filter:
     saturate(0.88)
     contrast(0.96)
@@ -1115,7 +1116,8 @@
   .program-card--mites .program-card__video,
   .program-card--public .program-card__video,
   .program-card--open .program-card__video,
-  .program-card--learn .program-card__video {
+  .program-card--learn .program-card__video,
+  .program-card--adult .program-card__video {
     filter:
       saturate(0.88)
       contrast(0.96)
@@ -1780,16 +1782,11 @@
 }
 
 /* =========================================================
-   ADULT LEAGUE TITLE
+   ADULT HOCKEY CLASSES TITLE
 
-   1726px and wider:
-   WINGS ARENA
-   ADULT HOCKEY LEAGUE
-
-   1725px and smaller:
-   WINGS ARENA
+   Simple two-line centered stack:
    ADULT HOCKEY
-   LEAGUE
+   CLASSES
    ========================================================= */
 
 .program-card--adult
@@ -1822,72 +1819,6 @@
   text-align: center;
 
   white-space: nowrap;
-}
-
-/*
-  Wide desktop:
-  combine ADULT HOCKEY + LEAGUE into the same centered row.
-*/
-
-@media (min-width: 1726px) {
-  .program-card--adult
-  .program-card__content {
-    width: min(98%, 620px);
-    max-width: 98%;
-  }
-
-  .program-card--adult
-  .program-card__title {
-    grid-template-columns:
-      auto
-      auto;
-
-    justify-content: center;
-
-    column-gap: 0.55ch;
-  }
-
-  .program-card--adult
-  .program-card__title span:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .program-card--adult
-  .program-card__title span:nth-child(2) {
-    grid-column: 1;
-  }
-
-  .program-card--adult
-  .program-card__title span:nth-child(3) {
-    grid-column: 2;
-  }
-}
-
-/*
-  1725px and smaller:
-  all three pieces get their own centered row.
-
-  This prevents LEAGUE from overflowing between
-  approximately 1000px and 1725px.
-*/
-
-@media (max-width: 1725px) {
-  .program-card--adult
-  .program-card__title {
-    grid-template-columns:
-      minmax(0, 1fr);
-
-    justify-content: stretch;
-  }
-
-  .program-card--adult
-  .program-card__title span:first-child,
-  .program-card--adult
-  .program-card__title span:nth-child(2),
-  .program-card--adult
-  .program-card__title span:nth-child(3) {
-    grid-column: 1;
-  }
 }
 
 /* =========================================================
