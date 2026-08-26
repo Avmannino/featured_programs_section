@@ -5,37 +5,6 @@ const BASE_URL = import.meta.env.BASE_URL;
 
 const programs = [
   {
-    id: "cosmic",
-    video: "videos/cosmic-skate.mp4",
-    playbackRate: 0.85,
-    eyebrow: "WINGS ARENA PRESENTS",
-    titleLines: ["COSMIC SKATE"],
-    meta: "FRIDAYS | SATURDAYS",
-    actions: [
-      {
-        label: "LEARN MORE",
-        href: "https://www.wingsarena.com/cosmic-skate",
-        tone: "navy",
-      },
-    ],
-  },
-
-  {
-    id: "public",
-    video: "videos/public-skate.mp4",
-    logo: "images/wings-arena-white-alt.png",
-    titleLines: ["PUBLIC SKATE"],
-    meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
-    actions: [
-      {
-        label: "LEARN MORE",
-        href: "https://www.wingsarena.com/publicskate",
-        tone: "red",
-      },
-    ],
-  },
-
-  {
     id: "learn",
     video: "videos/learn-to-play-skate.mp4",
     logo: "images/wings-logo.png",
@@ -104,6 +73,37 @@ const programs = [
       {
         label: "INFO & REGISTRATION",
         href: "https://www.wingsarena.com/adult-hockey-classes",
+        tone: "red",
+      },
+    ],
+  },
+
+  {
+    id: "cosmic",
+    video: "videos/cosmic-skate.mp4",
+    playbackRate: 0.85,
+    eyebrow: "WINGS ARENA PRESENTS",
+    titleLines: ["COSMIC SKATE"],
+    meta: "FRIDAYS | SATURDAYS",
+    actions: [
+      {
+        label: "LEARN MORE",
+        href: "https://www.wingsarena.com/cosmic-skate",
+        tone: "navy",
+      },
+    ],
+  },
+
+  {
+    id: "public",
+    video: "videos/public-skate.mp4",
+    logo: "images/wings-arena-white-alt.png",
+    titleLines: ["PUBLIC SKATE"],
+    meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
+    actions: [
+      {
+        label: "LEARN MORE",
+        href: "https://www.wingsarena.com/publicskate",
         tone: "red",
       },
     ],
