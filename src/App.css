@@ -1192,7 +1192,10 @@
   }
 
   .program-card--adult .program-card__logo {
-    margin-bottom: 5px;
+    width: clamp(35.7px, 10.24vw, 49.9px);
+    height: clamp(35.7px, 10.24vw, 49.9px);
+
+    margin-bottom: 9px;
   }
 
   .program-card__title,
