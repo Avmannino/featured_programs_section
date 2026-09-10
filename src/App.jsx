@@ -47,14 +47,12 @@ const programs = [
     id: "mites",
     video: "videos/mites-ltp-league.mp4",
     logo: "images/wings-dark-blue.png",
-    registration: "REGISTRATION IS OPEN",
-    titleLines: ["MITES 'LTP' LEAGUE"],
-    meta: "SUNDAYS THIS FALL & WINTER",
-    bottomMeta: "AGES 4–6",
+    titleLines: ["STICK & PUCK"],
+    meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
     actions: [
       {
-        label: "INFO & REGISTRATION",
-        href: "https://www.wingsarena.com/mites-ltp-league",
+        label: "LEARN MORE",
+        href: "https://www.wingsarena.com/stickandpuck",
         tone: "navy",
       },
     ],
