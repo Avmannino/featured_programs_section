@@ -45,14 +45,14 @@ const programs = [
 
   {
     id: "mites",
-    video: "videos/mites-ltp-league.mp4",
+    video: "videos/birthday.mp4",
     logo: "images/wings-dark-blue.png",
-    titleLines: ["STICK & PUCK"],
-    meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
+    titleLines: ["BIRTHDAY PARTIES"],
+    meta: "Celebrate your birthday on the ice!",
     actions: [
       {
         label: "LEARN MORE",
-        href: "https://www.wingsarena.com/stickandpuck",
+        href: "https://www.wingsarena.com/party-inquiries",
         tone: "navy",
       },
     ],

@@ -188,7 +188,7 @@
   filter:
     saturate(0.88)
     contrast(0.96)
-    blur(9px);
+    blur(15px);
 }
 
 .program-card--public .program-card__video {
@@ -385,7 +385,7 @@
   .program-card--mites .program-card__title {
     flex-direction: row;
 
-    font-size: clamp(14.5px, 1.63vw, 24.1px);
+    font-size: clamp(16.5px, 1.85vw, 29px);
     line-height: 1.15;
     letter-spacing: 0;
 
@@ -437,6 +437,10 @@
 .program-card__bottom-meta {
   margin-top:
     clamp(16px, 1.6vw, 20px);
+}
+
+.program-card--mites .program-card__meta {
+  font-size: clamp(8px, 0.82vw, 10.5px);
 }
 
 .program-card__meta-pipe {
@@ -662,7 +666,7 @@
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(20.4px, 1.42vw, 23.8px);
+    font-size: clamp(23px, 1.65vw, 29px);
   }
 
   .program-card--adult .program-card__title {
@@ -760,7 +764,7 @@
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(22.9px, 1.59vw, 26.7px);
+    font-size: clamp(26px, 1.8vw, 31px);
   }
 
   .program-card--adult .program-card__title {
@@ -848,7 +852,7 @@
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(23.2px, 1.62vw, 27px);
+    font-size: clamp(28px, 1.85vw, 32px);
   }
 
   .program-card--adult .program-card__title {
@@ -901,7 +905,7 @@
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(15px, 1.51vw, 18.1px);
+    font-size: clamp(17px, 1.8vw, 21px);
   }
 
   .program-card--public .program-card__meta,
@@ -977,7 +981,7 @@
   }
 
   .program-card--mites .program-card__title {
-    font-size: clamp(12.1px, 1.55vw, 15px);
+    font-size: clamp(14px, 1.75vw, 17px);
     line-height: 1.5;
     letter-spacing: 0;
 
@@ -1113,7 +1117,6 @@
    ========================================================= */
 
 @media (max-width: 767px) {
-  .program-card--mites .program-card__video,
   .program-card--public .program-card__video,
   .program-card--open .program-card__video,
   .program-card--learn .program-card__video,
@@ -1122,6 +1125,13 @@
       saturate(0.88)
       contrast(0.96)
       blur(5px);
+  }
+
+  .program-card--mites .program-card__video {
+    filter:
+      saturate(0.88)
+      contrast(0.96)
+      blur(9px);
   }
 
   .featured-programs-header {
