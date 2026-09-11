@@ -82,7 +82,7 @@ const programs = [
     playbackRate: 0.85,
     eyebrow: "WINGS ARENA PRESENTS",
     titleLines: ["COSMIC SKATE"],
-    meta: "SATURDAYS",
+    meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
     actions: [
       {
         label: "LEARN MORE",

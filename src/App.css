@@ -456,6 +456,7 @@
 }
 
 @media (min-width: 768px) {
+  .program-card--cosmic .program-card__meta,
   .program-card--public .program-card__meta,
   .program-card--open .program-card__meta,
   .program-card--adult .program-card__meta {
@@ -677,6 +678,7 @@
     font-size: clamp(15.3px, 1.64vw, 22.1px);
   }
 
+  .program-card--cosmic .program-card__meta,
   .program-card--public .program-card__meta,
   .program-card--open .program-card__meta,
   .program-card--adult .program-card__meta {
@@ -775,6 +777,7 @@
     font-size: clamp(17.1px, 1.84vw, 24.8px);
   }
 
+  .program-card--cosmic .program-card__meta,
   .program-card--public .program-card__meta,
   .program-card--open .program-card__meta,
   .program-card--adult .program-card__meta {
@@ -863,6 +866,7 @@
     font-size: clamp(18.2px, 1.96vw, 26.4px);
   }
 
+  .program-card--cosmic .program-card__meta,
   .program-card--public .program-card__meta,
   .program-card--open .program-card__meta,
   .program-card--adult .program-card__meta {
@@ -908,6 +912,7 @@
     font-size: clamp(17px, 1.8vw, 21px);
   }
 
+  .program-card--cosmic .program-card__meta,
   .program-card--public .program-card__meta,
   .program-card--open .program-card__meta,
   .program-card--adult .program-card__meta {
@@ -999,6 +1004,7 @@
     line-height: 2;
   }
 
+  .program-card--cosmic .program-card__meta,
   .program-card--public .program-card__meta,
   .program-card--adult .program-card__meta {
     width: 100%;
