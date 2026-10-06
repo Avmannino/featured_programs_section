@@ -2402,6 +2402,15 @@
   color: #ffffff;
 
   font-size: calc(var(--flag-width) * 0.55);
+
+  /*
+    A crisp drop plus a soft halo so the white letters stand
+    off the light flag colors. In em so it scales with the
+    letters.
+  */
+  text-shadow:
+    0 0.06em 0 rgba(0, 0, 0, 0.22),
+    0 0 0.2em rgba(0, 0, 0, 0.3);
 }
 
 /*
