@@ -2004,9 +2004,9 @@
 }
 
 /*
-  Icing over the top of the cake with a smooth wavy edge. The
-  wave is a mask so the icing keeps --cake-frosting's color;
-  "round" fits a whole number of waves across any width.
+  Wings-red icing over the top of the cake with a smooth wavy
+  edge outlined in white. "round" fits a whole number of waves
+  across any width.
 */
 .program-button__frosting {
   position: absolute;
@@ -2019,12 +2019,10 @@
   /* The outline's inner corner radius */
   border-radius: 12px 12px 0 0;
 
-  background: var(--wings-red);
-
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='20' viewBox='0 0 28 20'%3E%3Cpath d='M0 0H28V12C21 12 21 19 14 19C7 19 7 12 0 12Z'/%3E%3C/svg%3E") 0 0 / 28px 20px;
-  -webkit-mask-repeat: round no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='20' viewBox='0 0 28 20'%3E%3Cpath d='M0 0H28V12C21 12 21 19 14 19C7 19 7 12 0 12Z'/%3E%3C/svg%3E") 0 0 / 28px 20px;
-  mask-repeat: round no-repeat;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='20' viewBox='0 0 28 20'%3E%3Cpath d='M0 0H28V12C21 12 21 19 14 19C7 19 7 12 0 12Z' fill='%23e51937'/%3E%3Cpath d='M0 12C7 12 7 19 14 19C21 19 21 12 28 12' fill='none' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E")
+      0 0 / 28px 20px;
+  background-repeat: round no-repeat;
 }
 
 /* The plate the cake sits on, sharing the cake's bottom line */
@@ -2232,8 +2230,7 @@
 
     border-radius: 8px 8px 0 0;
 
-    -webkit-mask-size: 22px 16px;
-    mask-size: 22px 16px;
+    background-size: 22px 16px;
   }
 
   .program-button__plate {
