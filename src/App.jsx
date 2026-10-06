@@ -49,7 +49,12 @@ const programs = [
     balloonLogo: "images/optimized/wings-arena-blue-alt.webp",
     bannerLines: ["BIRTHDAY", "PARTIES"],
     // "<line index>-<letter index>": flag color, replacing the rotation
-    bannerFlagColors: { "1-0": "#5b9cf2", "1-1": "#5ce1d2" },
+    bannerFlagColors: {
+      "1-0": "#5b9cf2",
+      "1-1": "#5ce1d2",
+      "1-5": "#5ce1d2",
+      "1-6": "#ffd43b",
+    },
     actions: [
       {
         label: "LEARN MORE",
