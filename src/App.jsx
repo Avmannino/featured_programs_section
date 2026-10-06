@@ -48,6 +48,8 @@ const programs = [
     video: "videos/birthday.mp4",
     balloonLogo: "images/wings-pink.png",
     bannerLines: ["BIRTHDAY", "PARTIES"],
+    // "<line index>-<letter index>": letter color
+    bannerLetterColors: { "1-2": "#ffd43b" },
     actions: [
       {
         label: "LEARN MORE",
@@ -314,7 +316,7 @@ const BANNER_MAX_TILT_DEG = 8;
 
 const BANNER_FONT = '900 100px "Lulo Clean One Bold", Arial, Helvetica, sans-serif';
 
-function BirthdayBanner({ lines }) {
+function BirthdayBanner({ lines, letterColors = {} }) {
   const [inkOffsets, setInkOffsets] = useState({});
 
   // Measure each letter's visible ink so it can be centered on its flag,
@@ -385,7 +387,8 @@ function BirthdayBanner({ lines }) {
                       (1 - 2 * ropePosition) * BANNER_MAX_TILT_DEG
                     }deg`,
                     "--flag-color": color.flag,
-                    "--flag-letter": color.letter,
+                    "--flag-letter":
+                      letterColors[`${lineIndex}-${index}`] ?? color.letter,
                   }}
                 >
                   <span className="birthday-banner__flag-face">
@@ -508,7 +511,10 @@ function ProgramCard({ program }) {
         {program.balloonLogo && <FloatingBalloon logo={program.balloonLogo} />}
 
         {program.bannerLines ? (
-          <BirthdayBanner lines={program.bannerLines} />
+          <BirthdayBanner
+            lines={program.bannerLines}
+            letterColors={program.bannerLetterColors}
+          />
         ) : (
           <h2 className="program-card__title">
             {program.titleLines.map((line) => (
