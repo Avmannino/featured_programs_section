@@ -2463,6 +2463,10 @@
   .program-button--cake {
     zoom: 0.85;
   }
+
+  .program-button--cake .program-button__label {
+    font-size: 1.15em;
+  }
 }
 
 @media (min-width: 1002px) and (max-width: 1439px) {
