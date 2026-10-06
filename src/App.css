@@ -1985,7 +1985,7 @@
 
 .program-card--mites .program-card__actions {
   margin-top: 0;
-  padding-top: 18px;
+  padding-top: 32px;
 }
 
 .program-card__actions:not(.program-card__actions--multiple)
@@ -2251,7 +2251,7 @@
 
 @media (max-width: 767px) {
   .program-card--mites .program-card__actions {
-    padding-top: 18px;
+    padding-top: 28px;
   }
 
   .program-button--cake {
