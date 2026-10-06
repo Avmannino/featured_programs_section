@@ -1998,9 +1998,9 @@
   z-index: 1;
 }
 
-/* Lowered 10% of the cake's ~58px height from its earlier -3px */
+/* Lowered 12% of the cake's ~58px height from its earlier -3px */
 .program-button--cake .program-button__label {
-  transform: translateY(2.8px);
+  transform: translateY(4px);
 }
 
 /*
@@ -2240,9 +2240,9 @@
     height: 8px;
   }
 
-  /* Lowered 10% of the ~52px mobile cake from its earlier -1.6px */
+  /* Lowered 12% of the ~52px mobile cake from its earlier -1.6px */
   .program-button--cake .program-button__label {
-    transform: translateY(3.6px);
+    transform: translateY(4.6px);
   }
 
   .program-button__candles {
