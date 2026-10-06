@@ -1965,6 +1965,7 @@
   --cake-frosting: #ffffff;
   --cake-filling: #ffd166;
   --cake-filling-alt: #f4978e;
+  --cake-plate: #f08080;
   --cake-flame: #fcca46;
   --cake-flame-core: #fe7f2d;
 
@@ -1978,7 +1979,7 @@
     17px;
 
   border: 2px solid var(--cake-frosting);
-  border-radius: 10px 10px 3px 3px;
+  border-radius: 14px 14px 2px 2px;
 
   white-space: nowrap;
 
@@ -2028,33 +2029,45 @@
   transform: translateY(-3px);
 }
 
-/* A band of dripping icing across the top edge */
+/*
+  Icing over the top of the cake with a smooth wavy edge. The
+  wave is a mask so the icing keeps --cake-frosting's color;
+  "round" fits a whole number of waves across any width.
+*/
 .program-button__frosting {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
 
-  height: 14px;
+  height: 16px;
 
   /* The outline's inner corner radius */
-  border-radius: 8px 8px 0 0;
+  border-radius: 12px 12px 0 0;
 
-  background:
-    linear-gradient(var(--cake-frosting), var(--cake-frosting))
-      top / 100% 6px no-repeat,
-    radial-gradient(
-      circle at 50% 50%,
-      var(--cake-frosting) 4px,
-      transparent 4.5px
-    )
-      0 2px / 12px 12px repeat-x,
-    radial-gradient(
-      circle at 50% 50%,
-      var(--cake-frosting) 3px,
-      transparent 3.5px
-    )
-      6px 1px / 12px 12px repeat-x;
+  background: var(--cake-frosting);
+
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16' viewBox='0 0 28 16'%3E%3Cpath d='M0 0H28V8C21 8 21 15 14 15C7 15 7 8 0 8Z'/%3E%3C/svg%3E") 0 0 / 28px 16px;
+  -webkit-mask-repeat: round no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16' viewBox='0 0 28 16'%3E%3Cpath d='M0 0H28V8C21 8 21 15 14 15C7 15 7 8 0 8Z'/%3E%3C/svg%3E") 0 0 / 28px 16px;
+  mask-repeat: round no-repeat;
+}
+
+/* The plate the cake sits on, sharing the cake's bottom line */
+.program-button__plate {
+  position: absolute;
+  top: 100%;
+  right: -10px;
+  left: -10px;
+
+  z-index: -1;
+
+  height: 9px;
+
+  border: 2px solid var(--cake-frosting);
+  border-radius: 5px;
+
+  background: var(--cake-plate);
 }
 
 .program-button__candles {
@@ -2237,11 +2250,23 @@
       16px
       15px;
 
-    border-radius: 6px 6px 2px 2px;
+    border-radius: 10px 10px 2px 2px;
   }
 
   .program-button__frosting {
-    border-radius: 4px 4px 0 0;
+    height: 13px;
+
+    border-radius: 8px 8px 0 0;
+
+    -webkit-mask-size: 22px 13px;
+    mask-size: 22px 13px;
+  }
+
+  .program-button__plate {
+    right: -7px;
+    left: -7px;
+
+    height: 8px;
   }
 
   /* About 3.5% of the ~38px mobile cake lower than desktop */

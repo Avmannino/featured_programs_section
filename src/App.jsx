@@ -297,6 +297,7 @@ function CakeDecorations() {
       </span>
 
       <span className="program-button__frosting" aria-hidden="true" />
+      <span className="program-button__plate" aria-hidden="true" />
     </>
   );
 }
