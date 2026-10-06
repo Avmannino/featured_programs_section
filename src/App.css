@@ -2209,7 +2209,7 @@
     position: relative;
 
     /* Lift only the cake; the balloon and banner keep their layout */
-    top: -3px;
+    top: -6px;
 
     padding-top:
       calc(var(--banner-spacing) + var(--candle-reach) + 3px);
