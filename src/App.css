@@ -101,6 +101,9 @@
 }
 
 .featured-programs-header__title {
+  position: relative;
+  left: 10px;
+
   margin: 20px 0 0;
 
   color: #ffffff;
