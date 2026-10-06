@@ -49,7 +49,7 @@ const programs = [
     balloonLogo: "images/wings-pink.png",
     bannerLines: ["BIRTHDAY", "PARTIES"],
     // "<line index>-<letter index>": letter color
-    bannerLetterColors: { "1-2": "#ffd43b" },
+    bannerLetterColors: { "1-0": "#7048e8", "1-2": "#ffd43b" },
     actions: [
       {
         label: "LEARN MORE",
