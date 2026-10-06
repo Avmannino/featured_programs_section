@@ -2337,6 +2337,18 @@
   font-size: calc(var(--flag-width) * 0.55);
 }
 
+/*
+  Lulo's glyphs sit off-center in their advance width, so
+  each letter is nudged by its measured ink offset.
+*/
+.birthday-banner__letter {
+  transform: translateX(calc(var(--ink-offset, 0) * 1em));
+}
+
+.program-card--mites .program-card__divider {
+  visibility: hidden;
+}
+
 @media (min-width: 1920px) {
   .birthday-banner {
     --flag-width: clamp(38px, 2.1vw, 46px);

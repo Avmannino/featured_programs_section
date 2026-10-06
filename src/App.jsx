@@ -312,7 +312,44 @@ const BANNER_COLORS = [
 const BANNER_ROPE_OVERHANG = 0.06;
 const BANNER_MAX_TILT_DEG = 8;
 
+const BANNER_FONT = '900 100px "Lulo Clean One Bold", Arial, Helvetica, sans-serif';
+
 function BirthdayBanner({ lines }) {
+  const [inkOffsets, setInkOffsets] = useState({});
+
+  // Measure each letter's visible ink so it can be centered on its flag,
+  // rather than centering the glyph's (lopsided) advance width.
+  useEffect(() => {
+    let isCancelled = false;
+
+    document.fonts.load(BANNER_FONT).then(() => {
+      if (isCancelled) {
+        return;
+      }
+
+      const context = document.createElement("canvas").getContext("2d");
+      context.font = BANNER_FONT;
+      context.textAlign = "center";
+
+      const offsets = {};
+
+      for (const letter of new Set(lines.join(""))) {
+        const { actualBoundingBoxLeft, actualBoundingBoxRight } =
+          context.measureText(letter);
+
+        // Ink spans -left..+right around the center; shift it back by
+        // half the imbalance, expressed in em (font size is 100px).
+        offsets[letter] = (actualBoundingBoxLeft - actualBoundingBoxRight) / 200;
+      }
+
+      setInkOffsets(offsets);
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [lines]);
+
   return (
     <h2 className="birthday-banner" aria-label={lines.join(" ")}>
       {lines.map((line, lineIndex) => {
@@ -351,7 +388,14 @@ function BirthdayBanner({ lines }) {
                     "--flag-letter": color.letter,
                   }}
                 >
-                  <span className="birthday-banner__flag-face">{letter}</span>
+                  <span className="birthday-banner__flag-face">
+                    <span
+                      className="birthday-banner__letter"
+                      style={{ "--ink-offset": inkOffsets[letter] ?? 0 }}
+                    >
+                      {letter}
+                    </span>
+                  </span>
                 </span>
               );
             })}
