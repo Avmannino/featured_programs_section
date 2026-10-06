@@ -2430,10 +2430,14 @@
     font-size: calc(var(--flag-width) * 0.62);
   }
 
+  /* Nudged 2% of the flag's width right of center */
   .birthday-banner__letter {
     transform:
       translate(
-        calc(var(--ink-offset-x, 0) * 1em),
+        calc(
+          var(--ink-offset-x, 0) * 1em +
+            var(--flag-width) * 0.02
+        ),
         calc(
           var(--ink-offset-y, 0) * 1em +
             var(--flag-width) * 0.06
