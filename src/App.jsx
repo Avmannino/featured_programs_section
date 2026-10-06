@@ -53,7 +53,7 @@ const programs = [
       {
         label: "LEARN MORE",
         href: "https://www.wingsarena.com/party-inquiries",
-        tone: "navy",
+        tone: "cake",
       },
     ],
   },
@@ -273,6 +273,29 @@ function RegistrationTag({ label }) {
   );
 }
 
+const CAKE_CANDLE_COUNT = 3;
+
+function CakeDecorations() {
+  return (
+    <>
+      <span className="program-button__candles" aria-hidden="true">
+        {Array.from({ length: CAKE_CANDLE_COUNT }, (_, index) => (
+          <span key={index} className="program-button__candle" />
+        ))}
+      </span>
+
+      <span className="program-button__sparkles" aria-hidden="true">
+        <span>+</span>
+        <span>+</span>
+        <span>+</span>
+      </span>
+
+      <span className="program-button__frosting" aria-hidden="true" />
+      <span className="program-button__plate" aria-hidden="true" />
+    </>
+  );
+}
+
 function ProgramCard({ program }) {
   const videoRef = useRef(null);
 
@@ -350,7 +373,8 @@ function ProgramCard({ program }) {
               target="_top"
               aria-label={action.label}
             >
-              {action.label}
+              {action.tone === "cake" && <CakeDecorations />}
+              <span className="program-button__label">{action.label}</span>
             </a>
           ))}
         </div>
