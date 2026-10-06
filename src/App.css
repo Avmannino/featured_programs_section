@@ -2498,6 +2498,19 @@
   }
 }
 
+@media (min-width: 1441px) {
+  .birthday-balloon {
+    --balloon-width: clamp(48px, 4.2vw, 68px);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1440px) {
+  .birthday-balloon {
+    /* Lift only the balloon; the banner and cake keep their layout */
+    top: -6px;
+  }
+}
+
 @media (max-width: 767px) {
   .birthday-balloon {
     --balloon-width: clamp(29px, 7.7vw, 39px);
