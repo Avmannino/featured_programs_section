@@ -2002,18 +2002,33 @@
   transform: translateY(-3px);
 }
 
-/* A single drippy line of icing hanging from the top edge */
+/* A band of dripping icing across the top edge */
 .program-button__frosting {
   position: absolute;
   top: 0;
-  right: 4px;
-  left: 4px;
+  right: 0;
+  left: 0;
 
-  height: 9px;
+  height: 14px;
+
+  /* The outline's inner corner radius */
+  border-radius: 8px 8px 0 0;
 
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='9' viewBox='0 0 12 9'%3E%3Cpath d='M0 1 C3 1 3 7 6 7 C9 7 9 1 12 1' fill='none' stroke='%23f08080' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")
-      0 0 / 12px 9px repeat-x;
+    linear-gradient(var(--cake-frosting), var(--cake-frosting))
+      top / 100% 6px no-repeat,
+    radial-gradient(
+      circle at 50% 50%,
+      var(--cake-frosting) 4px,
+      transparent 4.5px
+    )
+      0 2px / 12px 12px repeat-x,
+    radial-gradient(
+      circle at 50% 50%,
+      var(--cake-frosting) 3px,
+      transparent 3.5px
+    )
+      6px 1px / 12px 12px repeat-x;
 }
 
 .program-button__candles {
@@ -2205,6 +2220,10 @@
       12px;
 
     border-radius: 6px 6px 2px 2px;
+  }
+
+  .program-button__frosting {
+    border-radius: 4px 4px 0 0;
   }
 
   /* About 3.5% of the ~38px mobile cake lower than desktop */
