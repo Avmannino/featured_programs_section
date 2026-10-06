@@ -1996,6 +1996,11 @@
   z-index: 1;
 }
 
+/* About 2% of the cake's ~50px height */
+.program-button--cake .program-button__label {
+  transform: translateY(-1px);
+}
+
 .program-button__frosting {
   position: absolute;
   top: 0;
