@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import "./App.css";
 
 const BASE_URL = import.meta.env.BASE_URL;
@@ -46,8 +46,8 @@ const programs = [
   {
     id: "mites",
     video: "videos/birthday.mp4",
-    logo: "images/wings-pink.png",
-    titleLines: ["BIRTHDAY PARTIES"],
+    balloonLogo: "images/wings-pink.png",
+    bannerLines: ["BIRTHDAY", "PARTIES"],
     actions: [
       {
         label: "LEARN MORE",
@@ -295,6 +295,128 @@ function CakeDecorations() {
   );
 }
 
+const BANNER_COLORS = [
+  { flag: "#e44fc6", letter: "#ffd43b" },
+  { flag: "#a78bfa", letter: "#ffffff" },
+  { flag: "#ffd43b", letter: "#7048e8" },
+  { flag: "#5ce1d2", letter: "#ffffff" },
+  { flag: "#5b9cf2", letter: "#ffffff" },
+  { flag: "#d56be0", letter: "#5a2fd6" },
+];
+
+/*
+  The rope SVG runs a little past the outer flags on both
+  sides. Each flag drops and tilts to follow the rope's
+  curve at its own position.
+*/
+const BANNER_ROPE_OVERHANG = 0.06;
+const BANNER_MAX_TILT_DEG = 8;
+
+function BirthdayBanner({ lines }) {
+  return (
+    <h2 className="birthday-banner" aria-label={lines.join(" ")}>
+      {lines.map((line, lineIndex) => {
+        const letters = [...line];
+
+        return (
+          <span key={line} className="birthday-banner__row" aria-hidden="true">
+            <svg
+              className="birthday-banner__rope"
+              viewBox="0 0 100 10"
+              preserveAspectRatio="none"
+            >
+              <path d="M0 1 Q50 19 100 1" />
+            </svg>
+
+            {letters.map((letter, index) => {
+              const flagPosition = (index + 0.5) / letters.length;
+              const ropePosition =
+                (BANNER_ROPE_OVERHANG + flagPosition) /
+                (1 + BANNER_ROPE_OVERHANG * 2);
+              const color =
+                BANNER_COLORS[
+                  (index + lineIndex * 3) % BANNER_COLORS.length
+                ];
+
+              return (
+                <span
+                  key={index}
+                  className="birthday-banner__flag"
+                  style={{
+                    "--flag-drop": 4 * ropePosition * (1 - ropePosition),
+                    "--flag-tilt": `${
+                      (1 - 2 * ropePosition) * BANNER_MAX_TILT_DEG
+                    }deg`,
+                    "--flag-color": color.flag,
+                    "--flag-letter": color.letter,
+                  }}
+                >
+                  <span className="birthday-banner__flag-face">{letter}</span>
+                </span>
+              );
+            })}
+          </span>
+        );
+      })}
+    </h2>
+  );
+}
+
+function FloatingBalloon({ logo }) {
+  const balloonRef = useRef(null);
+  const [isReleased, setIsReleased] = useState(false);
+
+  // Hold the balloon below the card until the card scrolls into view,
+  // so the float-up isn't over before anyone sees it.
+  useEffect(() => {
+    const card = balloonRef.current?.closest(".program-card");
+
+    if (!card) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsReleased(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(card);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={balloonRef}
+      className={`birthday-balloon${
+        isReleased ? " birthday-balloon--released" : ""
+      }`}
+      aria-hidden="true"
+    >
+      <div className="birthday-balloon__body">
+        <img
+          className="birthday-balloon__logo"
+          src={`${BASE_URL}${logo}`}
+          alt=""
+        />
+      </div>
+
+      <svg
+        className="birthday-balloon__string"
+        viewBox="0 0 10 40"
+        preserveAspectRatio="none"
+      >
+        <path d="M5 0 C1 10 9 20 5 30 S3 38 5 40" />
+      </svg>
+    </div>
+  );
+}
+
 function ProgramCard({ program }) {
   const videoRef = useRef(null);
 
@@ -339,11 +461,17 @@ function ProgramCard({ program }) {
           />
         )}
 
-        <h2 className="program-card__title">
-          {program.titleLines.map((line) => (
-            <span key={line}>{line}</span>
-          ))}
-        </h2>
+        {program.balloonLogo && <FloatingBalloon logo={program.balloonLogo} />}
+
+        {program.bannerLines ? (
+          <BirthdayBanner lines={program.bannerLines} />
+        ) : (
+          <h2 className="program-card__title">
+            {program.titleLines.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </h2>
+        )}
 
         <div className="program-card__divider" aria-hidden="true" />
 
