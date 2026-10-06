@@ -2413,7 +2413,7 @@
     position: relative;
 
     /* Lift only the cake; the balloon and banner keep their layout */
-    top: -5px;
+    top: -10px;
   }
 }
 
