@@ -1993,7 +1993,7 @@
 
 .program-card__actions:not(.program-card__actions--multiple)
   .program-button--cake {
-  min-width: 13ch;
+  min-width: 0;
 }
 
 .program-button--cake {
@@ -2009,10 +2009,14 @@
 
   isolation: isolate;
 
-  padding-top: 16px;
-  padding-bottom: 12px;
+  padding:
+    16px
+    12px
+    12px;
 
   border-radius: 10px 10px 3px 3px;
+
+  white-space: nowrap;
 
   background:
     linear-gradient(
@@ -2254,10 +2258,12 @@
   }
 
   .program-button--cake {
-    width: 62%;
+    width: auto;
 
-    padding-top: 13px;
-    padding-bottom: 9px;
+    padding:
+      13px
+      9px
+      9px;
 
     border-radius: 6px 6px 2px 2px;
   }
