@@ -295,6 +295,15 @@ function CakeDecorations() {
   );
 }
 
+const BANNER_FLAG_COLORS = [
+  "#e44fc6",
+  "#a78bfa",
+  "#ffd43b",
+  "#5ce1d2",
+  "#5b9cf2",
+  "#d56be0",
+];
+
 /*
   The rope SVG runs a little past the outer flags on both
   sides. Each flag drops and tilts to follow the rope's
@@ -343,7 +352,7 @@ function BirthdayBanner({ lines }) {
 
   return (
     <h2 className="birthday-banner" aria-label={lines.join(" ")}>
-      {lines.map((line) => {
+      {lines.map((line, lineIndex) => {
         const letters = [...line];
 
         return (
@@ -361,6 +370,10 @@ function BirthdayBanner({ lines }) {
               const ropePosition =
                 (BANNER_ROPE_OVERHANG + flagPosition) /
                 (1 + BANNER_ROPE_OVERHANG * 2);
+              const flagColor =
+                BANNER_FLAG_COLORS[
+                  (index + lineIndex * 3) % BANNER_FLAG_COLORS.length
+                ];
 
               return (
                 <span
@@ -371,6 +384,7 @@ function BirthdayBanner({ lines }) {
                     "--flag-tilt": `${
                       (1 - 2 * ropePosition) * BANNER_MAX_TILT_DEG
                     }deg`,
+                    "--flag-color": flagColor,
                   }}
                 >
                   <span className="birthday-banner__flag-face">
