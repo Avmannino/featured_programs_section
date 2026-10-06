@@ -32,7 +32,6 @@ const programs = [
     registration: "REGISTRATION IS OPEN",
     titleLines: ["LUNCHTIME", "ADULT", "HOCKEY"],
     meta: "MONDAYS | THURSDAYS 11:45AM - 1:15PM",
-    metaHighlight: "11:45AM - 1:15PM",
     bottomMeta: "BEGINNING SEPT 11TH",
     actions: [
       {
