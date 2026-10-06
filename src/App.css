@@ -2453,6 +2453,18 @@
   }
 }
 
+@media (min-width: 1002px) and (max-width: 1439px) {
+  /* A smaller cake, lifted closer to the banner */
+  .program-card--mites .program-card__actions {
+    position: relative;
+    top: -12px;
+  }
+
+  .program-button--cake {
+    zoom: 0.85;
+  }
+}
+
 @media (min-width: 1920px) {
   .program-card--mites .program-card__actions {
     position: relative;
