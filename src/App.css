@@ -2241,9 +2241,8 @@
     height: 8px;
   }
 
-  /* Lowered 14% of the ~52px mobile cake from its earlier -1.6px */
   .program-button--cake .program-button__label {
-    transform: translateY(5.6px);
+    transform: translateY(3.6px);
   }
 
   .program-button__candles {
