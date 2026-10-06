@@ -2301,7 +2301,7 @@
 
 @media (max-width: 767px) {
   .program-card--mites {
-    --flag-width: clamp(13px, 4.2vw, 20px);
+    --flag-width: clamp(14px, 4.6vw, 22px);
     --banner-spacing: 22px;
   }
 }
