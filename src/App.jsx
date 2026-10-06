@@ -48,6 +48,8 @@ const programs = [
     video: "videos/optimized/birthday.mp4",
     balloonLogo: "images/optimized/wings-arena-blue-alt.webp",
     bannerLines: ["BIRTHDAY", "PARTIES"],
+    // "<line index>-<letter index>": flag color, replacing the rotation
+    bannerFlagColors: { "1-0": "#5b9cf2", "1-1": "#5ce1d2" },
     actions: [
       {
         label: "LEARN MORE",
@@ -314,7 +316,7 @@ const BANNER_MAX_TILT_DEG = 8;
 
 const BANNER_FONT = '900 100px "Lulo Clean One Bold", Arial, Helvetica, sans-serif';
 
-function BirthdayBanner({ lines }) {
+function BirthdayBanner({ lines, flagColors = {} }) {
   const [inkOffsets, setInkOffsets] = useState({});
 
   // Measure each letter's visible ink so it can be centered on its flag,
@@ -391,6 +393,7 @@ function BirthdayBanner({ lines }) {
                 (BANNER_ROPE_OVERHANG + flagPosition) /
                 (1 + BANNER_ROPE_OVERHANG * 2);
               const flagColor =
+                flagColors[`${lineIndex}-${index}`] ??
                 BANNER_FLAG_COLORS[
                   (index + lineIndex * 3) % BANNER_FLAG_COLORS.length
                 ];
@@ -614,7 +617,10 @@ function ProgramCard({ program }) {
         {program.balloonLogo && <FloatingBalloon logo={program.balloonLogo} />}
 
         {program.bannerLines ? (
-          <BirthdayBanner lines={program.bannerLines} />
+          <BirthdayBanner
+            lines={program.bannerLines}
+            flagColors={program.bannerFlagColors}
+          />
         ) : (
           <h2 className="program-card__title">
             {program.titleLines.map((line) => (
