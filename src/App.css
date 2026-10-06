@@ -2496,6 +2496,9 @@
 @media (max-width: 767px) {
   .birthday-balloon {
     --balloon-width: clamp(29px, 7.7vw, 39px);
+
+    /* Lift only the balloon; the banner and cake keep their layout */
+    top: -7px;
   }
 }
 
