@@ -6,8 +6,8 @@ const BASE_URL = import.meta.env.BASE_URL;
 const programs = [
   {
     id: "learn",
-    video: "videos/learn-to-play-skate.mp4",
-    logo: "images/wings-logo.png",
+    video: "videos/optimized/learn-to-play-skate.mp4",
+    logo: "images/optimized/wings-logo.webp",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["LEARN TO PLAY", "&", "LEARN TO SKATE"],
     meta: "FALL SEASON",
@@ -27,8 +27,8 @@ const programs = [
 
   {
     id: "open",
-    video: "videos/open-hockey.mp4",
-    logo: "images/wings-arena-white-alt.png",
+    video: "videos/optimized/open-hockey.mp4",
+    logo: "images/optimized/wings-arena-white-alt.webp",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["LUNCHTIME", "ADULT", "HOCKEY"],
     meta: "MONDAYS | THURSDAYS 11:45AM - 1:15PM",
@@ -45,8 +45,8 @@ const programs = [
 
   {
     id: "mites",
-    video: "videos/birthday.mp4",
-    balloonLogo: "images/wings-arena-blue-alt.png",
+    video: "videos/optimized/birthday.mp4",
+    balloonLogo: "images/optimized/wings-arena-blue-alt.webp",
     bannerLines: ["BIRTHDAY", "PARTIES"],
     actions: [
       {
@@ -59,9 +59,9 @@ const programs = [
 
   {
     id: "adult",
-    video: "videos/adult-hockey-classes.mp4",
+    video: "videos/optimized/adult-hockey-classes.mp4",
     playbackRate: 0.5,
-    logo: "images/wings-arena-logo-alt.png",
+    logo: "images/optimized/wings-arena-logo-alt.webp",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["ADULT HOCKEY", "CLASSES"],
     meta: "TUESDAY MORNINGS | SEPT - NOV",
@@ -77,7 +77,7 @@ const programs = [
 
   {
     id: "cosmic",
-    video: "videos/cosmic-skate.mp4",
+    video: "videos/optimized/cosmic-skate.mp4",
     playbackRate: 0.85,
     eyebrow: "WINGS ARENA PRESENTS",
     titleLines: ["COSMIC SKATE"],
@@ -93,8 +93,8 @@ const programs = [
 
   {
     id: "public",
-    video: "videos/public-skate.mp4",
-    logo: "images/wings-arena-white-alt.png",
+    video: "videos/optimized/public-skate.mp4",
+    logo: "images/optimized/wings-arena-white-alt.webp",
     titleLines: ["PUBLIC SKATE"],
     meta: "CHECK OUR SCHEDULE BELOW FOR TIMES",
     actions: [
@@ -483,25 +483,109 @@ function FloatingBalloon({ logo }) {
   );
 }
 
-function ProgramCard({ program }) {
-  const videoRef = useRef(null);
+// Whether the element is at least partly on screen. Starts false; the
+// observer reports the real state right after mount.
+function useIsOnScreen(ref) {
+  const [isOnScreen, setIsOnScreen] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = program.playbackRate ?? 1;
+    const element = ref.current;
+
+    if (!element) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsOnScreen(entry.isIntersecting);
+    });
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [ref]);
+
+  return isOnScreen;
+}
+
+// Browsers can pause background videos on their own (power saving, tab
+// switches). Don't retry more often than this if one keeps doing it.
+const VIDEO_RESUME_INTERVAL_MS = 1000;
+
+function ProgramCard({ program }) {
+  const cardRef = useRef(null);
+  const videoRef = useRef(null);
+  const isOnScreen = useIsOnScreen(cardRef);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (video) {
+      // Set the default too: the browser resets playbackRate to it if it
+      // ever reloads the video.
+      video.defaultPlaybackRate = program.playbackRate ?? 1;
+      video.playbackRate = program.playbackRate ?? 1;
     }
   }, [program.playbackRate]);
 
+  // Only decode the video while its card is on screen, and keep it going
+  // while it is.
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return undefined;
+    }
+
+    if (!isOnScreen) {
+      video.pause();
+      return undefined;
+    }
+
+    let lastAttempt = -Infinity;
+
+    const resume = () => {
+      const now = performance.now();
+
+      if (
+        !video.paused ||
+        document.visibilityState !== "visible" ||
+        now - lastAttempt < VIDEO_RESUME_INTERVAL_MS
+      ) {
+        return;
+      }
+
+      lastAttempt = now;
+
+      // Rejected when the browser won't allow playback right now (e.g. a
+      // battery saver); the video then just holds its current frame.
+      video.play()?.catch(() => {});
+    };
+
+    resume();
+
+    video.addEventListener("pause", resume);
+    document.addEventListener("visibilitychange", resume);
+
+    return () => {
+      video.removeEventListener("pause", resume);
+      document.removeEventListener("visibilitychange", resume);
+    };
+  }, [isOnScreen]);
+
   return (
-    <article className={`program-card program-card--${program.id}`}>
+    <article
+      ref={cardRef}
+      className={`program-card program-card--${program.id}${
+        isOnScreen ? "" : " program-card--offscreen"
+      }`}
+    >
       <video
         ref={videoRef}
         className="program-card__video"
-        autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         aria-hidden="true"
       >
         <source src={`${BASE_URL}${program.video}`} type="video/mp4" />

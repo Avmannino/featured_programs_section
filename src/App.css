@@ -1,6 +1,8 @@
 @font-face {
   font-family: "Lulo Clean One";
-  src: url("./fonts/LuloCleanOne-Regular.otf") format("opentype");
+  src:
+    url("./fonts/LuloCleanOne-Regular.woff2") format("woff2"),
+    url("./fonts/LuloCleanOne-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -8,7 +10,9 @@
 
 @font-face {
   font-family: "Lulo Clean One Bold";
-  src: url("./fonts/LuloCleanOne-Bold.ttf") format("truetype");
+  src:
+    url("./fonts/LuloCleanOne-Bold.woff2") format("woff2"),
+    url("./fonts/LuloCleanOne-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -178,39 +182,18 @@
   object-position: center;
 
   pointer-events: none;
+}
 
+/*
+  Every other card's video has its blur and color grading
+  baked into the file (scripts/optimize_media.py), so the
+  browser doesn't redo it on every frame. Cosmic is shown
+  sharp and keeps its grading here.
+*/
+.program-card--cosmic .program-card__video {
   filter:
     saturate(0.88)
     contrast(0.96);
-}
-
-.program-card--mites .program-card__video {
-  filter:
-    saturate(0.88)
-    contrast(0.96)
-    blur(15px);
-}
-
-.program-card--public .program-card__video {
-  filter:
-    saturate(0.88)
-    contrast(0.96)
-    blur(9px);
-}
-
-.program-card--open .program-card__video {
-  filter:
-    saturate(0.88)
-    contrast(0.96)
-    blur(9px);
-}
-
-.program-card--learn .program-card__video,
-.program-card--adult .program-card__video {
-  filter:
-    saturate(0.88)
-    contrast(0.96)
-    blur(9px);
 }
 
 /* =========================================================
@@ -254,6 +237,23 @@
       rgba(41, 15, 44, 0.07) 44%,
       rgba(30, 9, 35, 0.29) 100%
     );
+}
+
+/*
+  A CSS blur also faded each card's edges into the dark card
+  background. With the blur baked into the videos, an inset
+  shadow recreates that edge: a shadow blur of twice the old
+  blur radius gives the same falloff.
+*/
+.program-card--learn .program-card__overlay,
+.program-card--open .program-card__overlay,
+.program-card--adult .program-card__overlay,
+.program-card--public .program-card__overlay {
+  box-shadow: inset 0 0 18px #142d46;
+}
+
+.program-card--mites .program-card__overlay {
+  box-shadow: inset 0 0 30px #142d46;
 }
 
 /* =========================================================
@@ -1085,21 +1085,16 @@
    ========================================================= */
 
 @media (max-width: 767px) {
-  .program-card--public .program-card__video,
-  .program-card--open .program-card__video,
-  .program-card--learn .program-card__video,
-  .program-card--adult .program-card__video {
-    filter:
-      saturate(0.88)
-      contrast(0.96)
-      blur(5px);
+  /* Edge fade for the old 5px / 9px mobile blur */
+  .program-card--public .program-card__overlay,
+  .program-card--open .program-card__overlay,
+  .program-card--learn .program-card__overlay,
+  .program-card--adult .program-card__overlay {
+    box-shadow: inset 0 0 10px #142d46;
   }
 
-  .program-card--mites .program-card__video {
-    filter:
-      saturate(0.88)
-      contrast(0.96)
-      blur(9px);
+  .program-card--mites .program-card__overlay {
+    box-shadow: inset 0 0 18px #142d46;
   }
 
   .featured-programs-header {
@@ -1493,9 +1488,6 @@
   box-shadow:
     -4px 6px 14px rgba(0, 0, 0, 0.24),
     -2px 2px 10px rgba(214, 31, 62, 0.12);
-
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
 
   pointer-events: none;
 }
@@ -2600,4 +2592,18 @@
     animation: none;
     transform: none;
   }
+}
+
+/* =========================================================
+   OFFSCREEN CARDS
+
+   Cards scrolled out of view pause their decorative
+   animations (laser, candles, sparkles, balloon) so they
+   cost nothing until they're visible again.
+   ========================================================= */
+
+.program-card.program-card--offscreen *,
+.program-card.program-card--offscreen *::before,
+.program-card.program-card--offscreen *::after {
+  animation-play-state: paused;
 }
