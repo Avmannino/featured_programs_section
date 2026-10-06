@@ -1936,9 +1936,17 @@
    the top edge.
    ========================================================= */
 
+/*
+  The space above the cake leaves room for the candles
+  (--candle-reach above the cake's top edge) plus the
+  banner spacing, so the flames sit exactly
+  --banner-spacing below the banner.
+*/
 .program-card--mites .program-card__actions {
+  --candle-reach: 29px;
+
   margin-top: 0;
-  padding-top: 32px;
+  padding-top: calc(var(--banner-spacing) + var(--candle-reach));
 }
 
 .program-card__actions:not(.program-card__actions--multiple)
@@ -2214,7 +2222,8 @@
     /* Lift only the cake; the balloon and banner keep their layout */
     top: -3px;
 
-    padding-top: 28px;
+    padding-top:
+      calc(var(--banner-spacing) + var(--candle-reach) + 3px);
   }
 
   .program-button--cake {
@@ -2253,10 +2262,39 @@
    from its position along the rope.
    ========================================================= */
 
-.birthday-banner {
+/*
+  Shared by the banner, the balloon above it and the cake
+  below it. --banner-spacing is the gap from the balloon's
+  string to the rope, and from the flags to the candle
+  flames.
+*/
+.program-card--mites {
   --flag-width: clamp(22px, 2.3vw, 34px);
-  --flag-gap: calc(var(--flag-width) * 0.12);
   --rope-sag: calc(var(--flag-width) * 0.32);
+  --banner-spacing: calc(clamp(14px, 1.4vw, 18px) * 2 + 5px);
+}
+
+@media (min-width: 1920px) {
+  .program-card--mites {
+    --flag-width: clamp(38px, 2.1vw, 46px);
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 768px) {
+  .program-card--mites {
+    --banner-spacing: 31px;
+  }
+}
+
+@media (max-width: 767px) {
+  .program-card--mites {
+    --flag-width: clamp(13px, 4.2vw, 20px);
+    --banner-spacing: 22px;
+  }
+}
+
+.birthday-banner {
+  --flag-gap: calc(var(--flag-width) * 0.12);
 
   display: flex;
 
@@ -2361,19 +2399,12 @@
 }
 
 .program-card--mites .program-card__divider {
-  visibility: hidden;
+  display: none;
 }
 
 @media (min-width: 1920px) {
   .birthday-banner {
-    --flag-width: clamp(38px, 2.1vw, 46px);
     --flag-gap: calc(var(--flag-width) * 0.2);
-  }
-}
-
-@media (max-width: 767px) {
-  .birthday-banner {
-    --flag-width: clamp(13px, 4.2vw, 20px);
   }
 }
 
@@ -2397,6 +2428,13 @@
   align-items: center;
 
   margin-bottom: 2px;
+
+  /*
+    Lift the balloon (without moving the banner or cake) so
+    its string ends --banner-spacing above the rope's lowest
+    point: 2px margin + the rope's sag, minus this lift.
+  */
+  top: calc(2px + var(--rope-sag) - var(--banner-spacing));
 
   transform: translateY(var(--balloon-rise));
   transform-origin: bottom center;
@@ -2504,19 +2542,9 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1440px) {
-  .birthday-balloon {
-    /* Lift only the balloon; the banner and cake keep their layout */
-    top: -6px;
-  }
-}
-
 @media (max-width: 767px) {
   .birthday-balloon {
     --balloon-width: clamp(29px, 7.7vw, 39px);
-
-    /* Lift only the balloon; the banner and cake keep their layout */
-    top: -7px;
   }
 }
 
