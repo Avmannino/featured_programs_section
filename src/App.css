@@ -1996,9 +1996,9 @@
   z-index: 1;
 }
 
-/* About 2% of the cake's ~50px height */
+/* About 4% of the cake's ~50px height */
 .program-button--cake .program-button__label {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .program-button__frosting {
