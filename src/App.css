@@ -2425,6 +2425,11 @@
   centered at 55%, hence the extra 0.06 flag widths.
 */
 @media (max-width: 767px) {
+  /* Slightly larger letters on the small mobile flags */
+  .birthday-banner__flag-face {
+    font-size: calc(var(--flag-width) * 0.62);
+  }
+
   .birthday-banner__letter {
     transform:
       translate(
