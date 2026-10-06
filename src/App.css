@@ -2408,6 +2408,15 @@
   }
 }
 
+@media (min-width: 1920px) {
+  .program-card--mites .program-card__actions {
+    position: relative;
+
+    /* Lift only the cake; the balloon and banner keep their layout */
+    top: -5px;
+  }
+}
+
 /* =========================================================
    FLOATING BALLOON
 
