@@ -2444,7 +2444,12 @@
   width: 72%;
   height: auto;
 
-  transform: translateY(-4%);
+  /* Nudged 2% of the balloon's width left, 5% of its height down */
+  transform:
+    translate(
+      calc(var(--balloon-width) * -0.02),
+      calc(-4% + var(--balloon-width) * 1.18 * 0.05)
+    );
 }
 
 .birthday-balloon__string {
