@@ -279,7 +279,7 @@ function RegistrationTag({ label }) {
   );
 }
 
-const CAKE_CANDLE_COUNT = 3;
+const CAKE_CANDLE_COUNT = 5;
 
 function CakeDecorations() {
   return (

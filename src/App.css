@@ -2098,7 +2098,8 @@
     inset -2px 0 rgba(0, 0, 0, 0.1);
 }
 
-.program-button__candle:nth-child(2) {
+/* The middle candle stands tallest */
+.program-button__candle:nth-child(3) {
   height: 19px;
 }
 
@@ -2141,12 +2142,21 @@
   animation: cake-flame-flicker 0.5s ease-out infinite;
 }
 
-.program-button__candle:nth-child(2)::after {
-  animation-duration: 0.6s;
+/* Different speeds so the flames don't flicker in step */
+.program-button__candle:nth-child(1)::after {
+  animation-duration: 0.55s;
 }
 
 .program-button__candle:nth-child(3)::after {
+  animation-duration: 0.6s;
+}
+
+.program-button__candle:nth-child(4)::after {
   animation-duration: 0.45s;
+}
+
+.program-button__candle:nth-child(5)::after {
+  animation-duration: 0.65s;
 }
 
 .program-button__sparkles {
@@ -2154,7 +2164,7 @@
   bottom: calc(100% + 4px);
   left: 50%;
 
-  width: 72px;
+  width: 116px;
   height: 30px;
 
   transform: translateX(-50%);
