@@ -32,6 +32,7 @@ const programs = [
     registration: "REGISTRATION IS OPEN",
     titleLines: ["LUNCHTIME", "ADULT", "HOCKEY"],
     meta: "MONDAYS | THURSDAYS 11:45AM - 1:15PM",
+    metaTime: "11:45AM - 1:15PM",
     bottomMeta: "BEGINNING SEPT 11TH",
     actions: [
       {
@@ -106,34 +107,34 @@ const programs = [
   },
 ];
 
-function renderTextWithHighlight(text, highlight, keyPrefix) {
-  if (!highlight) {
+function renderTextWithTime(text, time, keyPrefix) {
+  if (!time) {
     return [text];
   }
 
-  const highlightIndex = text.indexOf(highlight);
+  const timeIndex = text.indexOf(time);
 
-  if (highlightIndex === -1) {
+  if (timeIndex === -1) {
     return [text];
   }
 
   return [
-    text.slice(0, highlightIndex),
+    text.slice(0, timeIndex),
     <span
-      key={`${keyPrefix}-highlight`}
-      className="program-card__meta-highlight"
+      key={`${keyPrefix}-time`}
+      className="program-card__meta-time"
     >
-      {highlight}
+      {time}
     </span>,
-    text.slice(highlightIndex + highlight.length),
+    text.slice(timeIndex + time.length),
   ];
 }
 
-function renderMetaWithPipes(text, breakBeforeLastPipe = false, highlight) {
+function renderMetaWithPipes(text, breakBeforeLastPipe = false, time) {
   return text
     .split("|")
     .flatMap((part, index, parts) => {
-      const renderedPart = renderTextWithHighlight(part, highlight, index);
+      const renderedPart = renderTextWithTime(part, time, index);
 
       if (index >= parts.length - 1) {
         return renderedPart;
@@ -545,7 +546,7 @@ function ProgramCard({ program }) {
             {renderMetaWithPipes(
               program.meta,
               program.metaBreakBeforeLastPipe,
-              program.metaHighlight
+              program.metaTime
             )}
           </p>
         )}

@@ -433,8 +433,8 @@
   color: var(--wings-red);
 }
 
-.program-card__meta-highlight {
-  color: #d50036;
+.program-card__meta-time {
+  position: relative;
 }
 
 .program-card__meta-linebreak {
@@ -1306,6 +1306,11 @@
 
   .program-card--mites .program-card__content {
     transform: translateY(-4px);
+  }
+
+  /* Lower only the session time; the rest of the card keeps its layout */
+  .program-card__meta-time {
+    top: 4px;
   }
 
   .program-card--learn .program-card__eyebrow {
