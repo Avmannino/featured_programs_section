@@ -2463,6 +2463,11 @@
   .program-button--cake {
     zoom: 0.85;
   }
+
+  /* About 2px lower than the other desktop views */
+  .program-button--cake .program-button__label {
+    transform: translateY(7.6px);
+  }
 }
 
 @media (min-width: 1920px) {
