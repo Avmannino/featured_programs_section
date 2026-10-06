@@ -2501,11 +2501,11 @@
   width: 72%;
   height: auto;
 
-  /* Nudged 2% of the balloon's width left, 5% of its height down */
+  /* Nudged 3% of the balloon's width left, 4% of its height down */
   transform:
     translate(
-      calc(var(--balloon-width) * -0.02),
-      calc(-4% + var(--balloon-width) * 1.18 * 0.05)
+      calc(var(--balloon-width) * -0.03),
+      calc(-4% + var(--balloon-width) * 1.18 * 0.04)
     );
 }
 
