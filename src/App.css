@@ -2398,9 +2398,29 @@
   /* 5% of the flag's height lower than centered */
   transform:
     translate(
-      calc(var(--ink-offset, 0) * 1em),
+      calc(var(--ink-offset-x, 0) * 1em),
       calc(var(--flag-width) * 1.3 * 0.05)
     );
+}
+
+/*
+  On mobile, center each letter's measured ink exactly
+  between the bottom of the flag's top band (14% of its
+  height) and the tip of its notch (80%), i.e. 61% of the
+  flag's width from the top. The face's content box is
+  centered at 55%, hence the extra 0.06 flag widths.
+*/
+@media (max-width: 767px) {
+  .birthday-banner__letter {
+    transform:
+      translate(
+        calc(var(--ink-offset-x, 0) * 1em),
+        calc(
+          var(--ink-offset-y, 0) * 1em +
+            var(--flag-width) * 0.06
+        )
+      );
+  }
 }
 
 .program-card--mites .program-card__divider {

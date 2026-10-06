@@ -334,12 +334,32 @@ function BirthdayBanner({ lines }) {
       const offsets = {};
 
       for (const letter of new Set(lines.join(""))) {
-        const { actualBoundingBoxLeft, actualBoundingBoxRight } =
-          context.measureText(letter);
+        const {
+          actualBoundingBoxLeft,
+          actualBoundingBoxRight,
+          actualBoundingBoxAscent,
+          actualBoundingBoxDescent,
+          fontBoundingBoxAscent,
+          fontBoundingBoxDescent,
+        } = context.measureText(letter);
 
-        // Ink spans -left..+right around the center; shift it back by
-        // half the imbalance, expressed in em (font size is 100px).
-        offsets[letter] = (actualBoundingBoxLeft - actualBoundingBoxRight) / 200;
+        // Offsets are in em (font size is 100px).
+        // x: ink spans -left..+right around the center; shift it back by
+        // half the imbalance.
+        // y: with line-height 1, the line box's center sits
+        // (fontAscent - fontDescent) / 2 above the baseline; shift the ink's
+        // center onto it.
+        offsets[letter] = {
+          x: (actualBoundingBoxLeft - actualBoundingBoxRight) / 200,
+          y:
+            fontBoundingBoxAscent === undefined
+              ? 0
+              : (actualBoundingBoxAscent -
+                  actualBoundingBoxDescent -
+                  fontBoundingBoxAscent +
+                  fontBoundingBoxDescent) /
+                200,
+        };
       }
 
       setInkOffsets(offsets);
@@ -390,7 +410,10 @@ function BirthdayBanner({ lines }) {
                   <span className="birthday-banner__flag-face">
                     <span
                       className="birthday-banner__letter"
-                      style={{ "--ink-offset": inkOffsets[letter] ?? 0 }}
+                      style={{
+                        "--ink-offset-x": inkOffsets[letter]?.x ?? 0,
+                        "--ink-offset-y": inkOffsets[letter]?.y ?? 0,
+                      }}
                     >
                       {letter}
                     </span>
