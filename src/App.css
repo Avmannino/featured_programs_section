@@ -443,6 +443,10 @@
   font-size: clamp(8px, 0.82vw, 10.5px);
 }
 
+.program-card--mites .program-card__title {
+  color: #4695d1;
+}
+
 .program-card__meta-pipe {
   color: var(--wings-red);
 }

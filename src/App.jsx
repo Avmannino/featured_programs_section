@@ -46,7 +46,7 @@ const programs = [
   {
     id: "mites",
     video: "videos/birthday.mp4",
-    logo: "images/wings-dark-blue.png",
+    logo: "images/wings-pink.png",
     titleLines: ["BIRTHDAY PARTIES"],
     meta: "Celebrate your birthday on the ice!",
     actions: [
