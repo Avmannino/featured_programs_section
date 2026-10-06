@@ -2337,6 +2337,13 @@
   font-size: calc(var(--flag-width) * 0.55);
 }
 
+@media (min-width: 1920px) {
+  .birthday-banner {
+    --flag-width: clamp(38px, 2.1vw, 46px);
+    --flag-gap: calc(var(--flag-width) * 0.2);
+  }
+}
+
 @media (max-width: 767px) {
   .birthday-banner {
     --flag-width: clamp(13px, 4.2vw, 20px);
@@ -2370,7 +2377,7 @@
 
 .birthday-balloon--released {
   animation:
-    birthday-balloon-rise 2.6s ease-in-out forwards,
+    birthday-balloon-rise 2.6s cubic-bezier(0.25, 0.6, 0.35, 1) forwards,
     birthday-balloon-bob 2.4s ease-in-out 2.6s infinite alternate;
 }
 
@@ -2417,7 +2424,7 @@
 }
 
 .birthday-balloon__logo {
-  width: 62%;
+  width: 72%;
   height: auto;
 
   transform: translateY(-4%);
@@ -2440,21 +2447,11 @@
 }
 
 @keyframes birthday-balloon-rise {
-  0% {
+  from {
     transform: translateY(var(--balloon-rise)) rotate(-6deg);
   }
 
-  55% {
-    transform:
-      translateY(calc(var(--balloon-rise) * 0.15))
-      rotate(4deg);
-  }
-
-  80% {
-    transform: translateY(-6px) rotate(-2deg);
-  }
-
-  100% {
+  to {
     transform: translateY(0) rotate(0);
   }
 }
