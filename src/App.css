@@ -2327,7 +2327,7 @@
       rgba(0, 0, 0, 0.14) 0 14%,
       transparent 14%
     ),
-    var(--wings-navy);
+    #093b60;
 
   clip-path:
     polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
