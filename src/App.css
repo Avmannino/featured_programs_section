@@ -439,10 +439,6 @@
     clamp(16px, 1.6vw, 20px);
 }
 
-.program-card--mites .program-card__meta {
-  font-size: clamp(8px, 0.82vw, 10.5px);
-}
-
 .program-card--mites .program-card__title {
   color: #4695d1;
 }
@@ -1988,7 +1984,8 @@
    ========================================================= */
 
 .program-card--mites .program-card__actions {
-  padding-top: 26px;
+  margin-top: 0;
+  padding-top: 18px;
 }
 
 .program-card__actions:not(.program-card__actions--multiple)
@@ -2254,7 +2251,7 @@
 
 @media (max-width: 767px) {
   .program-card--mites .program-card__actions {
-    padding-top: 22px;
+    padding-top: 18px;
   }
 
   .program-button--cake {
