@@ -2245,9 +2245,9 @@
     border-radius: 6px 6px 2px 2px;
   }
 
-  /* About 2% of the ~38px mobile cake lower than desktop */
+  /* About 3.5% of the ~38px mobile cake lower than desktop */
   .program-button--cake .program-button__label {
-    transform: translateY(-2px);
+    transform: translateY(-1.6px);
   }
 
   .program-button__candles {
