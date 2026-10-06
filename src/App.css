@@ -1993,7 +1993,7 @@
 
 .program-card__actions:not(.program-card__actions--multiple)
   .program-button--cake {
-  min-width: 17ch;
+  min-width: 13ch;
 }
 
 .program-button--cake {
@@ -2254,7 +2254,7 @@
   }
 
   .program-button--cake {
-    width: 78%;
+    width: 62%;
 
     padding-top: 13px;
     padding-bottom: 9px;
