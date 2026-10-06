@@ -2542,6 +2542,13 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1919px) {
+  .birthday-balloon {
+    /* 4px closer to the banner than --banner-spacing */
+    top: calc(6px + var(--rope-sag) - var(--banner-spacing));
+  }
+}
+
 @media (max-width: 767px) {
   .birthday-balloon {
     --balloon-width: clamp(29px, 7.7vw, 39px);
