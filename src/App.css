@@ -1305,7 +1305,7 @@
   }
 
   .program-card--mites .program-card__content {
-    transform: translateY(3px);
+    transform: translateY(-4px);
   }
 
   .program-card--learn .program-card__eyebrow {
