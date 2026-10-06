@@ -2342,7 +2342,12 @@
   each letter is nudged by its measured ink offset.
 */
 .birthday-banner__letter {
-  transform: translateX(calc(var(--ink-offset, 0) * 1em));
+  /* 10% of the flag's height lower than centered */
+  transform:
+    translate(
+      calc(var(--ink-offset, 0) * 1em),
+      calc(var(--flag-width) * 1.3 * 0.1)
+    );
 }
 
 .program-card--mites .program-card__divider {
