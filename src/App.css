@@ -2066,7 +2066,7 @@
 }
 
 /* The middle candle stands tallest */
-.program-button__candle:nth-child(3) {
+.program-button__candle:nth-child(2) {
   height: 19px;
 }
 
@@ -2110,20 +2110,12 @@
 }
 
 /* Different speeds so the flames don't flicker in step */
-.program-button__candle:nth-child(1)::after {
-  animation-duration: 0.55s;
-}
-
-.program-button__candle:nth-child(3)::after {
+.program-button__candle:nth-child(2)::after {
   animation-duration: 0.6s;
 }
 
-.program-button__candle:nth-child(4)::after {
+.program-button__candle:nth-child(3)::after {
   animation-duration: 0.45s;
-}
-
-.program-button__candle:nth-child(5)::after {
-  animation-duration: 0.65s;
 }
 
 .program-button__sparkles {
@@ -2131,7 +2123,7 @@
   bottom: calc(100% + 4px);
   left: 50%;
 
-  width: 116px;
+  width: 72px;
   height: 30px;
 
   transform: translateX(-50%);
