@@ -2347,8 +2347,14 @@
 .birthday-banner__flag {
   position: relative;
 
+  /* Scaled to the flag so it reads the same on every screen size */
   filter:
-    drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+    drop-shadow(
+      0
+      calc(var(--flag-width) * 0.1)
+      calc(var(--flag-width) * 0.12)
+      rgba(0, 0, 0, 0.45)
+    );
 
   transform:
     translateY(
