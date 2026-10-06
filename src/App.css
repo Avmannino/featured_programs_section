@@ -122,6 +122,12 @@
   text-align: center;
 }
 
+@media (min-width: 1920px) {
+  .featured-programs-header__title {
+    left: 5px;
+  }
+}
+
 /* =========================================================
    PROGRAM GRID
    ========================================================= */
