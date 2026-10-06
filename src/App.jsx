@@ -48,8 +48,6 @@ const programs = [
     video: "videos/birthday.mp4",
     balloonLogo: "images/wings-pink.png",
     bannerLines: ["BIRTHDAY", "PARTIES"],
-    // "<line index>-<letter index>": letter color
-    bannerLetterColors: { "1-0": "#7048e8", "1-2": "#ffd43b" },
     actions: [
       {
         label: "LEARN MORE",
@@ -297,13 +295,13 @@ function CakeDecorations() {
   );
 }
 
-const BANNER_COLORS = [
-  { flag: "#e44fc6", letter: "#ffd43b" },
-  { flag: "#a78bfa", letter: "#ffffff" },
-  { flag: "#ffd43b", letter: "#7048e8" },
-  { flag: "#5ce1d2", letter: "#ffffff" },
-  { flag: "#5b9cf2", letter: "#ffffff" },
-  { flag: "#d56be0", letter: "#5a2fd6" },
+const BANNER_FLAG_COLORS = [
+  "#e44fc6",
+  "#a78bfa",
+  "#ffd43b",
+  "#5ce1d2",
+  "#5b9cf2",
+  "#d56be0",
 ];
 
 /*
@@ -316,7 +314,7 @@ const BANNER_MAX_TILT_DEG = 8;
 
 const BANNER_FONT = '900 100px "Lulo Clean One Bold", Arial, Helvetica, sans-serif';
 
-function BirthdayBanner({ lines, letterColors = {} }) {
+function BirthdayBanner({ lines }) {
   const [inkOffsets, setInkOffsets] = useState({});
 
   // Measure each letter's visible ink so it can be centered on its flag,
@@ -372,9 +370,9 @@ function BirthdayBanner({ lines, letterColors = {} }) {
               const ropePosition =
                 (BANNER_ROPE_OVERHANG + flagPosition) /
                 (1 + BANNER_ROPE_OVERHANG * 2);
-              const color =
-                BANNER_COLORS[
-                  (index + lineIndex * 3) % BANNER_COLORS.length
+              const flagColor =
+                BANNER_FLAG_COLORS[
+                  (index + lineIndex * 3) % BANNER_FLAG_COLORS.length
                 ];
 
               return (
@@ -386,9 +384,7 @@ function BirthdayBanner({ lines, letterColors = {} }) {
                     "--flag-tilt": `${
                       (1 - 2 * ropePosition) * BANNER_MAX_TILT_DEG
                     }deg`,
-                    "--flag-color": color.flag,
-                    "--flag-letter":
-                      letterColors[`${lineIndex}-${index}`] ?? color.letter,
+                    "--flag-color": flagColor,
                   }}
                 >
                   <span className="birthday-banner__flag-face">
@@ -511,10 +507,7 @@ function ProgramCard({ program }) {
         {program.balloonLogo && <FloatingBalloon logo={program.balloonLogo} />}
 
         {program.bannerLines ? (
-          <BirthdayBanner
-            lines={program.bannerLines}
-            letterColors={program.bannerLetterColors}
-          />
+          <BirthdayBanner lines={program.bannerLines} />
         ) : (
           <h2 className="program-card__title">
             {program.titleLines.map((line) => (
