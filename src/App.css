@@ -1976,6 +1976,9 @@
     17px;
 
   border: 2px solid var(--cake-plate);
+  /* Slightly heavier sides */
+  border-right-width: 3px;
+  border-left-width: 3px;
   border-radius: 14px 14px 2px 2px;
 
   white-space: nowrap;
