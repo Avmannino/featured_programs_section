@@ -2343,7 +2343,8 @@
 
   padding-bottom: var(--title-arc);
 
-  gap: calc(var(--title-scale) * 0.03);
+  /* The visible gap between every pair of letters */
+  gap: 0.29em;
 }
 
 /* Pull PARTIES up a little closer under BIRTHDAY */
@@ -2352,6 +2353,10 @@
 }
 
 .birthday-title__letter {
+  /* Trim each letter's built-in side space (measured in JS) */
+  margin-right: calc(var(--bearing-right) * -1em);
+  margin-left: calc(var(--bearing-left) * -1em);
+
   transform:
     translateY(calc(var(--title-arc) * var(--letter-drop)))
     rotate(var(--letter-tilt));

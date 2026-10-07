@@ -302,7 +302,47 @@ function CakeDecorations() {
 // Letters tilt up to this much at the ends of each word's arc.
 const TITLE_MAX_TILT_DEG = 8;
 
+const TITLE_FONT = '900 100px "Lulo Clean One Bold", Arial, Helvetica, sans-serif';
+
 function ArcTitle({ lines }) {
+  const [bearings, setBearings] = useState({});
+
+  // Lulo gives each letter different empty space on its sides, so equal
+  // boxes look unevenly spaced. Measure each letter's ink so the CSS can
+  // trim that space and leave the same gap between every pair.
+  useEffect(() => {
+    let isCancelled = false;
+
+    document.fonts.load(TITLE_FONT).then(() => {
+      if (isCancelled) {
+        return;
+      }
+
+      const context = document.createElement("canvas").getContext("2d");
+      context.font = TITLE_FONT;
+      context.textAlign = "left";
+
+      const measured = {};
+
+      for (const letter of new Set(lines.map((line) => line.text).join(""))) {
+        const { width, actualBoundingBoxLeft, actualBoundingBoxRight } =
+          context.measureText(letter);
+
+        // In em (font size is 100px)
+        measured[letter] = {
+          left: -actualBoundingBoxLeft / 100,
+          right: (width - actualBoundingBoxRight) / 100,
+        };
+      }
+
+      setBearings(measured);
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [lines]);
+
   return (
     <h2
       className="birthday-title"
@@ -329,6 +369,8 @@ function ArcTitle({ lines }) {
                   style={{
                     "--letter-drop": isRainbow ? 1 - middleness : middleness,
                     "--letter-tilt": `${lean * TITLE_MAX_TILT_DEG}deg`,
+                    "--bearing-left": bearings[letter]?.left ?? 0,
+                    "--bearing-right": bearings[letter]?.right ?? 0,
                   }}
                 >
                   {letter}
