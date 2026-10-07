@@ -2560,6 +2560,17 @@
   }
 }
 
+@media (min-width: 768px) {
+  /* A further 10px left on tablet and desktop */
+  .balloon-bundle__logo {
+    transform:
+      translate(
+        calc(var(--size) * -0.03 - 10px),
+        calc(-4% + var(--size) * 1.18 * 0.04)
+      );
+  }
+}
+
 @media (max-width: 767px) {
   .balloon-bundle {
     --balloon-width: clamp(29px, 7.7vw, 39px);
