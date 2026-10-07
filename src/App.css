@@ -2328,7 +2328,7 @@
 
   padding-bottom: var(--title-arc);
 
-  gap: calc(var(--title-scale) * 0.08);
+  gap: calc(var(--title-scale) * 0.03);
 }
 
 .birthday-title__letter {
