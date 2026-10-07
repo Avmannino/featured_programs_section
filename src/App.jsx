@@ -46,7 +46,7 @@ const programs = [
   {
     id: "mites",
     video: "videos/optimized/birthday.mp4",
-    balloonLogo: "images/optimized/wings-arena-blue-alt.webp",
+    balloonLogo: "images/optimized/wings-arena-white-alt.webp",
     // "rainbow" arches up in the middle; "smile" dips in the middle
     arcTitleLines: [
       { text: "BIRTHDAY", shape: "rainbow" },
