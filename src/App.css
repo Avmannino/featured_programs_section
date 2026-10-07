@@ -2313,8 +2313,6 @@
 
   margin: 0;
 
-  gap: calc(var(--title-scale) * 0.12);
-
   color: #ffffff;
 
   font-family:
@@ -2336,6 +2334,11 @@
   padding-bottom: var(--title-arc);
 
   gap: calc(var(--title-scale) * 0.03);
+}
+
+/* Pull PARTIES up a little closer under BIRTHDAY */
+.birthday-title__row + .birthday-title__row {
+  margin-top: calc(var(--title-scale) * -0.08);
 }
 
 .birthday-title__letter {
