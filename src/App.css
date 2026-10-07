@@ -63,8 +63,7 @@
   background: #0a3b61;
   color: #ffffff;
 
-  border-top: 3px solid #ffffff;
-  border-bottom: 3px solid #ffffff;
+  border: 3px solid #ffffff;
 }
 
 .featured-programs-header__brand {
@@ -143,8 +142,9 @@
 
   gap: 2px;
 
-  /* Closes off the last row of cards, matching the header lines */
-  border-bottom: 3px solid #ffffff;
+  /* Frames the cards, matching the header lines */
+  border: 3px solid #ffffff;
+  border-top: 0;
 
   background: #ffffff;
 }
