@@ -299,17 +299,88 @@ function CakeDecorations() {
   );
 }
 
-// Letters tilt up to this much at the ends of each word's arc.
-const TITLE_MAX_TILT_DEG = 8;
-
 const TITLE_FONT = '900 100px "Lulo Clean One Bold", Arial, Helvetica, sans-serif';
 
-function ArcTitle({ lines }) {
-  const [bearings, setBearings] = useState({});
+/*
+  Each word is real text laid along a circular arc (SVG textPath), so the
+  browser keeps the font's own spacing and kerning and turns every letter
+  to follow the curve. Geometry is in SVG units where the font size is
+  100, and each SVG is sized in em, so 100 units = 1em of the title.
+*/
+const ARC = {
+  // Height of a capital letter, including round letters' overshoot
+  capHeight: 80,
+  // How far the word's end letters sit below its middle ones
+  drop: 38,
+  // Spare path beyond each end of the text, so no letter falls off
+  overrun: 60,
+  // Room around the path for the outer letters' tilt
+  padding: 30,
+  // Below the lowest letters
+  bottom: 6,
+};
 
-  // Lulo gives each letter different empty space on its sides, so equal
-  // boxes look unevenly spaced. Measure each letter's ink so the CSS can
-  // trim that space and leave the same gap between every pair.
+function arcGeometry(textWidth, shape) {
+  const halfText = textWidth / 2;
+  const halfChord = halfText + ARC.overrun;
+
+  // The path runs past the text, so its sag must be deeper for the
+  // text's own ends to drop by ARC.drop (sag grows with distance squared).
+  const sag = ARC.drop / (halfText / halfChord) ** 2;
+  const radius = (halfChord ** 2 + sag ** 2) / (2 * sag);
+
+  const width = 2 * (halfChord + ARC.padding);
+  const left = ARC.padding;
+  const right = width - ARC.padding;
+
+  if (shape === "rainbow") {
+    // Middle letters' tops at the top edge; the path bows upward.
+    const endY = ARC.capHeight + sag;
+
+    return {
+      viewBox: `0 0 ${width} ${ARC.capHeight + ARC.drop + ARC.bottom}`,
+      path: `M${left} ${endY} A${radius} ${radius} 0 0 1 ${right} ${endY}`,
+    };
+  }
+
+  // Smile: the path bows downward; crop the empty space above the ends.
+  const top = sag - ARC.drop;
+
+  return {
+    viewBox: `0 ${top} ${width} ${ARC.capHeight + ARC.drop + ARC.bottom}`,
+    path: `M${left} ${ARC.capHeight} A${radius} ${radius} 0 0 0 ${right} ${ARC.capHeight}`,
+  };
+}
+
+function ArcWord({ text, shape, width }) {
+  const pathId = useId();
+  const { viewBox, path } = arcGeometry(width, shape);
+  const [, , boxWidth, boxHeight] = viewBox.split(" ").map(Number);
+
+  return (
+    <svg
+      className="birthday-title__row"
+      viewBox={viewBox}
+      style={{ width: `${boxWidth / 100}em`, height: `${boxHeight / 100}em` }}
+      aria-hidden="true"
+    >
+      <defs>
+        <path id={pathId} d={path} />
+      </defs>
+
+      <text fontSize="100" textAnchor="middle">
+        <textPath href={`#${pathId}`} startOffset="50%">
+          {text}
+        </textPath>
+      </text>
+    </svg>
+  );
+}
+
+function ArcTitle({ lines }) {
+  const [widths, setWidths] = useState({});
+
+  // Measure each word in the real font (with kerning) to size its arc.
   useEffect(() => {
     let isCancelled = false;
 
@@ -320,22 +391,14 @@ function ArcTitle({ lines }) {
 
       const context = document.createElement("canvas").getContext("2d");
       context.font = TITLE_FONT;
-      context.textAlign = "left";
 
       const measured = {};
 
-      for (const letter of new Set(lines.map((line) => line.text).join(""))) {
-        const { width, actualBoundingBoxLeft, actualBoundingBoxRight } =
-          context.measureText(letter);
-
-        // In em (font size is 100px)
-        measured[letter] = {
-          left: -actualBoundingBoxLeft / 100,
-          right: (width - actualBoundingBoxRight) / 100,
-        };
+      for (const { text } of lines) {
+        measured[text] = context.measureText(text).width;
       }
 
-      setBearings(measured);
+      setWidths(measured);
     });
 
     return () => {
@@ -348,38 +411,15 @@ function ArcTitle({ lines }) {
       className="birthday-title"
       aria-label={lines.map((line) => line.text).join(" ")}
     >
-      {lines.map(({ text, shape }) => {
-        const letters = [...text];
-        const isRainbow = shape === "rainbow";
-
-        return (
-          <span key={text} className="birthday-title__row" aria-hidden="true">
-            {letters.map((letter, index) => {
-              const position = (index + 0.5) / letters.length;
-              // 1 at the middle of the word, 0 at its ends
-              const middleness = 4 * position * (1 - position);
-              // Positive leans right; ends lean outward on a rainbow
-              // and inward on a smile.
-              const lean = (2 * position - 1) * (isRainbow ? 1 : -1);
-
-              return (
-                <span
-                  key={index}
-                  className="birthday-title__letter"
-                  style={{
-                    "--letter-drop": isRainbow ? 1 - middleness : middleness,
-                    "--letter-tilt": `${lean * TITLE_MAX_TILT_DEG}deg`,
-                    "--bearing-left": bearings[letter]?.left ?? 0,
-                    "--bearing-right": bearings[letter]?.right ?? 0,
-                  }}
-                >
-                  {letter}
-                </span>
-              );
-            })}
-          </span>
-        );
-      })}
+      {lines.map(({ text, shape }) => (
+        <ArcWord
+          key={text}
+          text={text}
+          shape={shape}
+          // Until the font loads, estimate ~1em per letter
+          width={widths[text] ?? text.length * 100}
+        />
+      ))}
     </h2>
   );
 }

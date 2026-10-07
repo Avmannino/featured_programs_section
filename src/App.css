@@ -2273,22 +2273,19 @@
 /* =========================================================
    BIRTHDAY PARTIES TITLE
 
-   One row per word. Each letter is dropped and tilted so
-   each word follows an arc (rainbow or smile); its
-   --letter-drop / --letter-tilt is set inline from its
-   position in the word.
+   One SVG per word, its text laid along an arc (rainbow or
+   smile) so the font's own spacing and kerning are kept.
+   The arc geometry is computed in ArcTitle.
    ========================================================= */
 
 /*
   Shared by the title, the balloon bundle above it and the
-  cake below it. --title-scale sizes the letters, --title-arc
-  is the depth of each word's arc, and
+  cake below it. --title-scale sizes the letters and
   --title-spacing is the gap from the title to the candle
   flames.
 */
 .program-card--mites {
   --title-scale: clamp(22px, 2.3vw, 34px);
-  --title-arc: calc(var(--title-scale) * 0.32);
   --title-spacing: calc(clamp(14px, 1.4vw, 18px) * 2 + 5px);
 }
 
@@ -2333,33 +2330,22 @@
   font-size: calc(var(--title-scale) * 0.8);
   font-weight: 900;
   line-height: 1;
-
-  text-shadow:
-    0 2px 5px rgba(0, 0, 0, 0.28);
 }
 
 .birthday-title__row {
-  display: flex;
+  display: block;
 
-  padding-bottom: var(--title-arc);
+  overflow: visible;
 
-  /* The visible gap between every pair of letters */
-  gap: 0.29em;
+  fill: currentColor;
+
+  filter:
+    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.28));
 }
 
-/* Pull PARTIES up a little closer under BIRTHDAY */
+/* Space between BIRTHDAY's lowest letters and PARTIES */
 .birthday-title__row + .birthday-title__row {
-  margin-top: calc(var(--title-scale) * -0.08);
-}
-
-.birthday-title__letter {
-  /* Trim each letter's built-in side space (measured in JS) */
-  margin-right: calc(var(--bearing-right) * -1em);
-  margin-left: calc(var(--bearing-left) * -1em);
-
-  transform:
-    translateY(calc(var(--title-arc) * var(--letter-drop)))
-    rotate(var(--letter-tilt));
+  margin-top: 0.08em;
 }
 
 @media (max-width: 767px) {
