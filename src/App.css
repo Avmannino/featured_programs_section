@@ -63,7 +63,7 @@
   background: #0a3b61;
   color: #ffffff;
 
-  border-bottom: 3px solid #ffffff;
+  border-bottom: 3px solid #003764;
 }
 
 .featured-programs-header__brand {
@@ -143,9 +143,10 @@
   gap: 2px;
 
   /* Closes off the last row of cards, matching the header line */
-  border-bottom: 3px solid #ffffff;
+  border-bottom: 3px solid #003764;
 
-  background: #ffffff;
+  /* Shows through the gaps as the lines between cards */
+  background: #003764;
 }
 
 /* =========================================================
