@@ -2391,6 +2391,10 @@
     /* Lift only the cake; the balloons and title keep their layout */
     top: -12px;
   }
+
+  .birthday-title {
+    font-size: calc(var(--title-scale) * 0.88);
+  }
 }
 
 @media (min-width: 1920px) {
