@@ -2561,11 +2561,11 @@
 }
 
 @media (min-width: 768px) {
-  /* A further 4px left on tablet and desktop */
+  /* A further 2.5px left on tablet and desktop */
   .balloon-bundle__logo {
     transform:
       translate(
-        calc(var(--size) * -0.03 - 4px),
+        calc(var(--size) * -0.03 - 2.5px),
         calc(-4% + var(--size) * 1.18 * 0.04)
       );
   }
