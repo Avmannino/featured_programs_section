@@ -2347,6 +2347,12 @@
     rotate(var(--letter-tilt));
 }
 
+@media (max-width: 767px) {
+  .birthday-title {
+    font-size: calc(var(--title-scale) * 0.9);
+  }
+}
+
 .program-card--mites .program-card__divider {
   display: none;
 }
