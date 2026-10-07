@@ -2261,7 +2261,7 @@
    BIRTHDAY PARTIES TITLE
 
    One row per word. Each letter is dropped and tilted so
-   the words follow a rainbow-shaped arc; its
+   each word follows an arc (rainbow or smile); its
    --letter-drop / --letter-tilt is set inline from its
    position in the word.
    ========================================================= */
@@ -2269,7 +2269,7 @@
 /*
   Shared by the title, the balloon bundle above it and the
   cake below it. --title-scale sizes the letters, --title-arc
-  is how far the ends of each word drop, and
+  is the depth of each word's arc, and
   --title-spacing is the gap from the title to the candle
   flames.
 */

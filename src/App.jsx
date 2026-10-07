@@ -47,7 +47,11 @@ const programs = [
     id: "mites",
     video: "videos/optimized/birthday.mp4",
     balloonLogo: "images/optimized/wings-arena-blue-alt.webp",
-    arcTitleLines: ["BIRTHDAY", "PARTIES"],
+    // "rainbow" arches up in the middle; "smile" dips in the middle
+    arcTitleLines: [
+      { text: "BIRTHDAY", shape: "rainbow" },
+      { text: "PARTIES", shape: "smile" },
+    ],
     actions: [
       {
         label: "LEARN MORE",
@@ -300,26 +304,31 @@ const TITLE_MAX_TILT_DEG = 8;
 
 function ArcTitle({ lines }) {
   return (
-    <h2 className="birthday-title" aria-label={lines.join(" ")}>
-      {lines.map((line) => {
-        const letters = [...line];
+    <h2
+      className="birthday-title"
+      aria-label={lines.map((line) => line.text).join(" ")}
+    >
+      {lines.map(({ text, shape }) => {
+        const letters = [...text];
+        const isRainbow = shape === "rainbow";
 
         return (
-          <span key={line} className="birthday-title__row" aria-hidden="true">
+          <span key={text} className="birthday-title__row" aria-hidden="true">
             {letters.map((letter, index) => {
               const position = (index + 0.5) / letters.length;
+              // 1 at the middle of the word, 0 at its ends
+              const middleness = 4 * position * (1 - position);
+              // Positive leans right; ends lean outward on a rainbow
+              // and inward on a smile.
+              const lean = (2 * position - 1) * (isRainbow ? 1 : -1);
 
               return (
                 <span
                   key={index}
                   className="birthday-title__letter"
                   style={{
-                    // Rainbow arc: the middle sits highest, the ends
-                    // drop and lean outward.
-                    "--letter-drop": 1 - 4 * position * (1 - position),
-                    "--letter-tilt": `${
-                      (2 * position - 1) * TITLE_MAX_TILT_DEG
-                    }deg`,
+                    "--letter-drop": isRainbow ? 1 - middleness : middleness,
+                    "--letter-tilt": `${lean * TITLE_MAX_TILT_DEG}deg`,
                   }}
                 >
                   {letter}
