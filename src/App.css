@@ -2221,6 +2221,9 @@
   .program-button--cake {
     width: auto;
 
+    /* A slightly smaller cake on phones */
+    zoom: 0.88;
+
     padding:
       22px
       16px
