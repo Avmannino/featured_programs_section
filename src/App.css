@@ -1966,6 +1966,13 @@
   }
 }
 
+@media (min-width: 1000px) and (max-width: 1250px) {
+  .program-card--mites .program-card__actions {
+    /* 6px lower in this range */
+    transform: translateY(-21px);
+  }
+}
+
 .program-card__actions:not(.program-card__actions--multiple)
   .program-button--cake {
   min-width: 0;
