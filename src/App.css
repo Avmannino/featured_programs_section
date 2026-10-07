@@ -2389,7 +2389,7 @@
     position: relative;
 
     /* Lift only the cake; the balloons and title keep their layout */
-    top: -5px;
+    top: -12px;
   }
 }
 
