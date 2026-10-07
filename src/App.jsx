@@ -50,7 +50,7 @@ const programs = [
     // "rainbow" arches up in the middle; "smile" dips in the middle
     arcTitleLines: [
       { text: "BIRTHDAY", shape: "rainbow" },
-      { text: "PARTIES", shape: "smile" },
+      { text: "PARTIES", shape: "rainbow" },
     ],
     actions: [
       {
