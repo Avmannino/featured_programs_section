@@ -47,14 +47,7 @@ const programs = [
     id: "mites",
     video: "videos/optimized/birthday.mp4",
     balloonLogo: "images/optimized/wings-arena-blue-alt.webp",
-    bannerLines: ["BIRTHDAY", "PARTIES"],
-    // "<line index>-<letter index>": flag color, replacing the rotation
-    bannerFlagColors: {
-      "1-0": "#5b9cf2",
-      "1-1": "#5ce1d2",
-      "1-5": "#5ce1d2",
-      "1-6": "#ffd43b",
-    },
+    arcTitleLines: ["BIRTHDAY", "PARTIES"],
     actions: [
       {
         label: "LEARN MORE",
@@ -302,130 +295,32 @@ function CakeDecorations() {
   );
 }
 
-const BANNER_FLAG_COLORS = [
-  "#e44fc6",
-  "#a78bfa",
-  "#ffd43b",
-  "#5ce1d2",
-  "#5b9cf2",
-  "#d56be0",
-];
+// Letters tilt up to this much at the ends of each word's arc.
+const TITLE_MAX_TILT_DEG = 8;
 
-/*
-  The rope SVG runs a little past the outer flags on both
-  sides. Each flag drops and tilts to follow the rope's
-  curve at its own position.
-*/
-const BANNER_ROPE_OVERHANG = 0.06;
-const BANNER_MAX_TILT_DEG = 8;
-
-const BANNER_FONT = '900 100px "Lulo Clean One Bold", Arial, Helvetica, sans-serif';
-
-function BirthdayBanner({ lines, flagColors = {} }) {
-  const [inkOffsets, setInkOffsets] = useState({});
-
-  // Measure each letter's visible ink so it can be centered on its flag,
-  // rather than centering the glyph's (lopsided) advance width.
-  useEffect(() => {
-    let isCancelled = false;
-
-    document.fonts.load(BANNER_FONT).then(() => {
-      if (isCancelled) {
-        return;
-      }
-
-      const context = document.createElement("canvas").getContext("2d");
-      context.font = BANNER_FONT;
-      context.textAlign = "center";
-
-      const offsets = {};
-
-      for (const letter of new Set(lines.join(""))) {
-        const {
-          actualBoundingBoxLeft,
-          actualBoundingBoxRight,
-          actualBoundingBoxAscent,
-          actualBoundingBoxDescent,
-          fontBoundingBoxAscent,
-          fontBoundingBoxDescent,
-        } = context.measureText(letter);
-
-        // Offsets are in em (font size is 100px).
-        // x: ink spans -left..+right around the center; shift it back by
-        // half the imbalance.
-        // y: with line-height 1, the line box's center sits
-        // (fontAscent - fontDescent) / 2 above the baseline; shift the ink's
-        // center onto it.
-        offsets[letter] = {
-          x: (actualBoundingBoxLeft - actualBoundingBoxRight) / 200,
-          y:
-            fontBoundingBoxAscent === undefined
-              ? 0
-              : (actualBoundingBoxAscent -
-                  actualBoundingBoxDescent -
-                  fontBoundingBoxAscent +
-                  fontBoundingBoxDescent) /
-                200,
-        };
-      }
-
-      setInkOffsets(offsets);
-    });
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [lines]);
-
+function ArcTitle({ lines }) {
   return (
-    <h2 className="birthday-banner" aria-label={lines.join(" ")}>
-      {lines.map((line, lineIndex) => {
+    <h2 className="birthday-title" aria-label={lines.join(" ")}>
+      {lines.map((line) => {
         const letters = [...line];
 
         return (
-          <span key={line} className="birthday-banner__row" aria-hidden="true">
-            <svg
-              className="birthday-banner__rope"
-              viewBox="0 0 100 10"
-              preserveAspectRatio="none"
-            >
-              <path d="M0 1 Q50 19 100 1" />
-            </svg>
-
+          <span key={line} className="birthday-title__row" aria-hidden="true">
             {letters.map((letter, index) => {
-              const flagPosition = (index + 0.5) / letters.length;
-              const ropePosition =
-                (BANNER_ROPE_OVERHANG + flagPosition) /
-                (1 + BANNER_ROPE_OVERHANG * 2);
-              const flagColor =
-                flagColors[`${lineIndex}-${index}`] ??
-                BANNER_FLAG_COLORS[
-                  (index + lineIndex * 3) % BANNER_FLAG_COLORS.length
-                ];
+              const position = (index + 0.5) / letters.length;
 
               return (
                 <span
                   key={index}
-                  className="birthday-banner__flag"
+                  className="birthday-title__letter"
                   style={{
-                    "--flag-drop": 4 * ropePosition * (1 - ropePosition),
-                    "--flag-tilt": `${
-                      (1 - 2 * ropePosition) * BANNER_MAX_TILT_DEG
+                    "--letter-drop": 4 * position * (1 - position),
+                    "--letter-tilt": `${
+                      (1 - 2 * position) * TITLE_MAX_TILT_DEG
                     }deg`,
-                    "--flag-color": flagColor,
                   }}
                 >
-                  <span className="birthday-banner__flag-face">
-                    <span
-                      className="birthday-banner__letter"
-                      style={{
-                        "--ink-offset-x": inkOffsets[letter]?.x ?? 0,
-                        "--ink-offset-y": inkOffsets[letter]?.y ?? 0,
-                      }}
-                    >
-                      {letter}
-                    </span>
-                  </span>
+                  {letter}
                 </span>
               );
             })}
@@ -436,57 +331,61 @@ function BirthdayBanner({ lines, flagColors = {} }) {
   );
 }
 
-function FloatingBalloon({ logo }) {
-  const balloonRef = useRef(null);
-  const [isReleased, setIsReleased] = useState(false);
+/*
+  Outer to inner, left to right. angle fans the arm out from
+  the knot; string and size are multiples of the bundle's
+  balloon width. Different sway timings keep the balloons
+  from moving in step.
+*/
+const BUNDLE_BALLOONS = [
+  { angle: -42, string: 0.95, size: 0.82, color: "#4695d1", sway: 4.6, delay: -1.2 },
+  { angle: -21, string: 1.2, size: 0.88, color: "#ffffff", sway: 5.3, delay: -3.1 },
+  { angle: 0, string: 1, size: 1, color: "#e41a37", sway: 4.1, delay: -0.4, hasLogo: true },
+  { angle: 22, string: 1.15, size: 0.88, color: "#4695d1", sway: 5, delay: -2.2 },
+  { angle: 40, string: 0.9, size: 0.82, color: "#ffffff", sway: 4.4, delay: -3.6 },
+];
 
-  // Hold the balloon below the card until the card scrolls into view,
-  // so the float-up isn't over before anyone sees it.
-  useEffect(() => {
-    const card = balloonRef.current?.closest(".program-card");
-
-    if (!card) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsReleased(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.35 }
-    );
-
-    observer.observe(card);
-
-    return () => observer.disconnect();
-  }, []);
-
+function BalloonBundle({ logo }) {
   return (
-    <div
-      ref={balloonRef}
-      className={`birthday-balloon${
-        isReleased ? " birthday-balloon--released" : ""
-      }`}
-      aria-hidden="true"
-    >
-      <div className="birthday-balloon__body">
-        <img
-          className="birthday-balloon__logo"
-          src={`${BASE_URL}${logo}`}
-          alt=""
-        />
-      </div>
+    <div className="balloon-bundle" aria-hidden="true">
+      {BUNDLE_BALLOONS.map((balloon) => (
+        <div
+          key={balloon.angle}
+          className="balloon-bundle__arm"
+          style={{
+            "--arm-angle": `${balloon.angle}deg`,
+            "--string-length": balloon.string,
+            "--balloon-scale": balloon.size,
+            "--balloon-color": balloon.color,
+            "--sway-duration": `${balloon.sway}s`,
+            "--sway-delay": `${balloon.delay}s`,
+            // Center balloon in front, outer ones furthest back
+            zIndex: 3 - Math.round(Math.abs(balloon.angle) / 20),
+          }}
+        >
+          <div className="balloon-bundle__sway">
+            <div className="balloon-bundle__balloon">
+              {balloon.hasLogo && (
+                <img
+                  className="balloon-bundle__logo"
+                  src={`${BASE_URL}${logo}`}
+                  alt=""
+                />
+              )}
+            </div>
 
-      <svg
-        className="birthday-balloon__string"
-        viewBox="0 0 10 40"
-        preserveAspectRatio="none"
-      >
-        <path d="M5 0 C1 10 9 20 5 30 S3 38 5 40" />
-      </svg>
+            <svg
+              className="balloon-bundle__string"
+              viewBox="0 0 10 40"
+              preserveAspectRatio="none"
+            >
+              <path d="M5 0 C1 10 9 20 5 30 S3 38 5 40" />
+            </svg>
+          </div>
+        </div>
+      ))}
+
+      <span className="balloon-bundle__knot" />
     </div>
   );
 }
@@ -619,13 +518,10 @@ function ProgramCard({ program }) {
           />
         )}
 
-        {program.balloonLogo && <FloatingBalloon logo={program.balloonLogo} />}
+        {program.balloonLogo && <BalloonBundle logo={program.balloonLogo} />}
 
-        {program.bannerLines ? (
-          <BirthdayBanner
-            lines={program.bannerLines}
-            flagColors={program.bannerFlagColors}
-          />
+        {program.arcTitleLines ? (
+          <ArcTitle lines={program.arcTitleLines} />
         ) : (
           <h2 className="program-card__title">
             {program.titleLines.map((line) => (
