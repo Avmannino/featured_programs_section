@@ -353,7 +353,8 @@ function arcGeometry(textWidth, shape) {
 }
 
 function ArcWord({ text, shape, width }) {
-  const pathId = useId();
+  // useId() output isn't safe inside a url fragment; keep letters/digits
+  const pathId = `arc-word-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const { viewBox, path } = arcGeometry(width, shape);
   const [, , boxWidth, boxHeight] = viewBox.split(" ").map(Number);
 
