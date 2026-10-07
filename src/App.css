@@ -1959,6 +1959,13 @@
   transform: translateY(-20px);
 }
 
+@media (min-width: 768px) {
+  .program-card--mites .program-card__actions {
+    /* 7px higher on tablet and desktop */
+    transform: translateY(-27px);
+  }
+}
+
 .program-card__actions:not(.program-card__actions--multiple)
   .program-button--cake {
   min-width: 0;
