@@ -2299,6 +2299,10 @@
 }
 
 .birthday-title {
+  /* Raised with the balloons; the cake keeps its place */
+  position: relative;
+  top: -10px;
+
   display: flex;
 
   flex-direction: column;
@@ -2398,6 +2402,8 @@
   --balloon-width: clamp(40px, 3.9vw, 60px);
 
   position: relative;
+  /* Raised with the title; the cake keeps its place */
+  top: -10px;
   z-index: 2;
 
   width: calc(var(--balloon-width) * 3.2);
