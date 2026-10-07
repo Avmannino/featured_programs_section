@@ -1311,7 +1311,7 @@
   }
 
   .program-card--mites .program-card__content {
-    transform: translateY(-4px);
+    transform: translateY(3px);
   }
 
   /* Lower only the session time; the rest of the card keeps its layout */
