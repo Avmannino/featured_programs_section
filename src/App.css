@@ -1954,6 +1954,9 @@
 
   margin-top: 0;
   padding-top: calc(var(--title-spacing) + var(--candle-reach));
+
+  /* Raised to follow the balloons and title; nothing else moves */
+  transform: translateY(-20px);
 }
 
 .program-card__actions:not(.program-card__actions--multiple)
