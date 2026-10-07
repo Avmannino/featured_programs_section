@@ -143,6 +143,9 @@
 
   gap: 2px;
 
+  /* Closes off the last row of cards, matching the header lines */
+  border-bottom: 3px solid #ffffff;
+
   background: #ffffff;
 }
 
