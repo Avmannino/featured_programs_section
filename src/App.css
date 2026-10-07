@@ -2384,12 +2384,21 @@
   }
 }
 
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .program-card--mites .program-card__actions {
+    position: relative;
+
+    /* Lift only the cake; the balloons and title keep their layout */
+    top: -5px;
+  }
+}
+
 @media (min-width: 1920px) {
   .program-card--mites .program-card__actions {
     position: relative;
 
     /* Lift only the cake; the balloons and title keep their layout */
-    top: -15px;
+    top: -10px;
   }
 }
 
