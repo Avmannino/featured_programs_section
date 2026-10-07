@@ -262,7 +262,7 @@
 }
 
 .program-card--mites .program-card__overlay {
-  box-shadow: inset 0 0 30px #142d46;
+  box-shadow: inset 0 0 41px #142d46;
 }
 
 /* =========================================================
@@ -1103,7 +1103,7 @@
   }
 
   .program-card--mites .program-card__overlay {
-    box-shadow: inset 0 0 18px #142d46;
+    box-shadow: inset 0 0 25px #142d46;
   }
 
   .featured-programs-header {

@@ -23,6 +23,7 @@ breakpoint, so these fractions reproduce it on 1440px+ desktops (cards
 
     9px desktop / 5px mobile CSS blur       -> 0.0154
     15px desktop / 9px mobile (birthday)    -> 0.026
+                                               (now 0.036 for more blur)
 
 The CSS also applied saturate(0.88) contrast(0.96) to every video. For the
 blurred videos that is baked in as COLOR_LUT; in YUV it is a luma contrast
@@ -46,7 +47,7 @@ VIDEOS = [
     # (file, blur as a fraction of height, or None to keep the picture as-is)
     ("learn-to-play-skate.mp4", 0.0154),
     ("open-hockey.mp4", 0.0154),
-    ("birthday.mp4", 0.026),
+    ("birthday.mp4", 0.036),
     ("adult-hockey-classes.mp4", 0.0154),
     ("public-skate.mp4", 0.0154),
     # Shown sharp, so its picture is copied untouched. Remuxing only drops the
