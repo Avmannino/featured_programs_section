@@ -349,8 +349,8 @@ function ArcTitle({ lines }) {
   from moving in step.
 */
 const BUNDLE_BALLOONS = [
-  { angle: -42, string: 0.95, size: 0.82, color: "#0a3c61", sway: 4.6, delay: -1.2 },
-  { angle: -21, string: 1.2, size: 0.88, color: "#e51837", sway: 5.3, delay: -3.1 },
+  { angle: -42, string: 0.95, size: 0.82, color: "#e51837", sway: 4.6, delay: -1.2 },
+  { angle: -21, string: 1.2, size: 0.88, color: "#0a3c61", sway: 5.3, delay: -3.1 },
   { angle: 0, string: 1, size: 1, color: "#e51837", sway: 4.1, delay: -0.4, hasLogo: true },
   { angle: 22, string: 1.15, size: 0.88, color: "#0a3c61", sway: 5, delay: -2.2 },
   { angle: 40, string: 0.9, size: 0.82, color: "#e51837", sway: 4.4, delay: -3.6 },
