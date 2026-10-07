@@ -63,7 +63,8 @@
   background: #0a3b61;
   color: #ffffff;
 
-  border-bottom: 3px solid #d50036;
+  border-top: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
 }
 
 .featured-programs-header__brand {
