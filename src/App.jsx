@@ -314,9 +314,11 @@ function ArcTitle({ lines }) {
                   key={index}
                   className="birthday-title__letter"
                   style={{
-                    "--letter-drop": 4 * position * (1 - position),
+                    // Rainbow arc: the middle sits highest, the ends
+                    // drop and lean outward.
+                    "--letter-drop": 1 - 4 * position * (1 - position),
                     "--letter-tilt": `${
-                      (1 - 2 * position) * TITLE_MAX_TILT_DEG
+                      (2 * position - 1) * TITLE_MAX_TILT_DEG
                     }deg`,
                   }}
                 >
