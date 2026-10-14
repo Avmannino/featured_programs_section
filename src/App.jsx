@@ -10,7 +10,7 @@ const programs = [
     logo: "images/optimized/wings-logo.webp",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["LEARN TO PLAY", "&", "LEARN TO SKATE"],
-    meta: "FALL SEASON",
+    meta: "FALL & WINTER SEASONS",
     actions: [
       {
         label: "LEARN TO PLAY",
