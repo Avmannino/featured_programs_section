@@ -10,7 +10,7 @@ const programs = [
     logo: "images/optimized/wings-logo.webp",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["LEARN TO PLAY", "&", "LEARN TO SKATE"],
-    meta: "FALL & WINTER SEASONS",
+    meta: "WINTER REGISTRATION IS LIVE!",
     actions: [
       {
         label: "LEARN TO PLAY",
@@ -29,15 +29,14 @@ const programs = [
     id: "open",
     video: "videos/optimized/open-hockey.mp4",
     logo: "images/optimized/wings-arena-white-alt.webp",
-    registration: "REGISTRATION IS OPEN",
-    titleLines: ["LUNCHTIME", "ADULT", "HOCKEY"],
-    meta: "MONDAYS | THURSDAYS 11:45AM - 1:15PM",
-    metaTime: "11:45AM - 1:15PM",
-    bottomMeta: "BEGINNING SEPT 11TH",
+    titleLines: ["WOMENS", "ADULT", "HOCKEY CLASSES"],
+    meta: "THURSDAYS 11AM - 12PM",
+    metaTime: "11AM - 12PM",
+    bottomMeta: "NO REGISTRATION NECESSARY, JUST DROP IN!",
     actions: [
       {
-        label: "INFO & REGISTRATION",
-        href: "https://www.wingsarena.com/adult-lunchtime-hockey",
+        label: "LEARN MORE",
+        href: "https://www.wingsarena.com/womens-adult-hockey-classes",
         tone: "red",
       },
     ],
@@ -380,9 +379,11 @@ function ArcWord({ text, shape, width }) {
 }
 
 function ArcTitle({ lines }) {
+  const titleRef = useRef(null);
   const [widths, setWidths] = useState({});
 
-  // Measure each word in the real font (with kerning) to size its arc.
+  // Measure each word in the real font (with kerning and the CSS letter
+  // spacing) to size its arc.
   useEffect(() => {
     let isCancelled = false;
 
@@ -393,6 +394,17 @@ function ArcTitle({ lines }) {
 
       const context = document.createElement("canvas").getContext("2d");
       context.font = TITLE_FONT;
+
+      // The SVG text is set at font size 100, the same as TITLE_FONT, so
+      // its computed spacing in px applies to the canvas as-is.
+      const textElement = titleRef.current?.querySelector("text");
+      const letterSpacing = textElement
+        ? getComputedStyle(textElement).letterSpacing
+        : "normal";
+
+      if (letterSpacing !== "normal") {
+        context.letterSpacing = letterSpacing;
+      }
 
       const measured = {};
 
@@ -410,6 +422,7 @@ function ArcTitle({ lines }) {
 
   return (
     <h2
+      ref={titleRef}
       className="birthday-title"
       aria-label={lines.map((line) => line.text).join(" ")}
     >
@@ -659,7 +672,11 @@ function ProgramCard({ program }) {
         </div>
 
         {program.bottomMeta && (
-          <p className="program-card__bottom-meta">{program.bottomMeta}</p>
+          <p className="program-card__bottom-meta">
+            <span className="program-card__bottom-meta-text">
+              {program.bottomMeta}
+            </span>
+          </p>
         )}
       </div>
     </article>
