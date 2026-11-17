@@ -68,7 +68,7 @@ const programs = [
     logo: "images/optimized/wings-arena-logo-alt.webp",
     registration: "REGISTRATION IS OPEN",
     titleLines: ["ADULT HOCKEY", "CLASSES"],
-    meta: "TUESDAY MORNINGS | SEPT - NOV",
+    meta: "TUESDAY MORNINGS | NOV - FEB",
     metaBreakBeforeLastPipe: true,
     actions: [
       {
